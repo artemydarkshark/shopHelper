@@ -23,6 +23,7 @@ export default StyleSheet.create({
     width: '95%',
     marginLeft: -12,
     marginTop: 12,
+    height: 100,
     // overflow: 'scroll',
   },
   dropdownTextStyle: {
@@ -31,7 +32,7 @@ export default StyleSheet.create({
   },
   label: {
     position: 'absolute',
-    bottom: '10%',
+    top: '50%',
     right: '10%',
-  }
+  },
 });
