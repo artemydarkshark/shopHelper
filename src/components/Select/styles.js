@@ -9,14 +9,14 @@ export default StyleSheet.create({
   button: {
     margin: 10,
     borderBottomWidth: 2,
-    borderBottomColor: theme.colors.textColor,
+    borderBottomColor: theme.colors.inputColor,
     padding: 10,
     position: 'relative',
   },
 
   text: {
     fontSize: 18,
-    color: 'gray',
+    color: theme.colors.inputColor,
   },
   dropdownStyle: {
     position: 'absolute',
