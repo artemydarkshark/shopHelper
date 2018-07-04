@@ -1,29 +1,29 @@
-import { StackNavigator } from 'react-navigation';
-import WelcomePage from '../components/WelcomePage';
-import Settings from '../components/Settings';
+import { StackNavigator } from "react-navigation";
+import WelcomePage from "../components/WelcomePage";
+import Settings from "../components/Settings";
 
 export const Navigator = StackNavigator(
   {
     Home: {
       screen: WelcomePage,
       navigationOptions: {
-        title: 'Home',
-      },
+        title: "Home"
+      }
     },
     Settings: {
       screen: Settings,
       navigationOptions: {
-        title: 'Settings',
-      },
-    },
+        title: "Settings"
+      }
+    }
   },
   {
     navigationOptions: {
       headerBackTitle: null,
-      headerTintColor: '#fff',
+      headerTintColor: "#fff",
       headerStyle: {
-        backgroundColor: '#d32f2f',
-      },
-    },
-  },
+        backgroundColor: "#d32f2f"
+      }
+    }
+  }
 );
