@@ -7,9 +7,18 @@
 import React from "react";
 // import { Platform, StyleSheet, Text, View } from "react-native";
 // import Welcome from "./components/WelcomePage";
+import { Provider } from "react-redux";
 import { Navigator } from "./config/navigator";
 
-export default () => <Navigator />;
+import store from "./config/store";
+
+const App = () => (
+  <Provider store={store}>
+    <Navigator />
+  </Provider>
+);
+
+export default () => <App />;
 
 /* const styles = StyleSheet.create({
   container: {
