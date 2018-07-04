@@ -19,12 +19,10 @@ class Welcome extends React.Component<Props> {
   };
   render() {
     return (
-      <View style={styles.container }>
-        <Text style={styles.welcome      }>Welcome to React Na
-        tive!!!</Text>
-        <Text style={styles.instructions}>To get start
-        ed, edit App.js</Text>
-        <Text      style={styles.instructions}>     {instructions}        </Text>
+      <View style={styles.container}>
+        <Text style={styles.welcome}>Welcome to React Ntive!!!</Text>
+        <Text style={styles.instructions}>To get stared, edit App.js</Text>
+        <Text style={styles.instructions}>     {instructions}        </Text>
         <Button title="BUTTON" onPress={this.toSettings} />
       </View>
     );

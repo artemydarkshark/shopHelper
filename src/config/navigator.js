@@ -4,7 +4,7 @@ import Settings from '../components/Settings';
 
 export const Navigator = StackNavigator({
   Home: {
-    screen: Settings,
+    screen: WelcomePage,
     navigationOptions: {
       title: 'Home',
     },
@@ -23,7 +23,5 @@ export const Navigator = StackNavigator({
     headerStyle: {
       backgroundColor: '#d32f2f',
     },
-    
   },
-
 });
