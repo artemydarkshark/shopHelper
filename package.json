@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "ios": "react-native run-ios",
-    "test": "jest"
+    "test": "jest",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "react": "16.3.1",
