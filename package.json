@@ -9,6 +9,7 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
+    "@redux-offline/redux-offline": "^2.4.0",
     "react": "16.3.1",
     "react-native": "0.55.2",
     "react-native-elements": "^0.19.1",
@@ -21,7 +22,6 @@
     "redux": "^3.7.2",
     "redux-actions": "^2.4.0",
     "redux-devtools-extension": "^2.13.2",
-    "redux-offline": "^2.0.0",
     "reselect": "^3.0.1"
   },
   "devDependencies": {
@@ -36,7 +36,7 @@
     "eslint-plugin-react": "^7.7.0",
     "flow-bin": "^0.67.1",
     "jest": "22.4.3",
-    "prettier": "^1.13.7",
+    "prettier": "1.13.7",
     "react-test-renderer": "16.3.1"
   },
   "jest": {
@@ -45,6 +45,10 @@
   "lint-staged": {
     "src/**/*.{js,jsx,json,css,scss}": [
       "prettier --write --print-width 100 --trailing-comma es5 --single-quote --no-semi",
+      "git add"
+    ],
+    "src/**/*.{js,jsx}": [
+      "eslint --fix",
       "git add"
     ]
   }
