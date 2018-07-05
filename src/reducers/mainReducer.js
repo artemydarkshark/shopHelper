@@ -2,7 +2,7 @@
 import { handleActions } from "redux-actions";
 import { Record } from "immutable";
 import type { RecordFactory, RecordOf } from "immutable";
-
+import type { Payload } from "../types";
 import actions from "../actions";
 
 type state = {
@@ -13,18 +13,14 @@ const { mainActions } = actions;
 
 const InitialState: RecordFactory<state> = Record(
   {
-    name: "hello"
+    name: "vadJs"
   },
   "mainReducerState"
 );
 
 const handleChangeMainName = (
   state,
-  {
-    payload
-  }: {
-    payload: string
-  }
+  { payload }: Payload<string>
 ): RecordOf<state> => state.set("name", payload);
 
 export default handleActions(
