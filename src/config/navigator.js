@@ -1,13 +1,13 @@
 import { StackNavigator } from "react-navigation";
-import WelcomePage from "../components/WelcomePage";
+import FirstScreen from "../screens/FirstScreen";
 import Settings from "../components/Settings";
 
 export const Navigator = StackNavigator(
   {
     Home: {
-      screen: WelcomePage,
+      screen: FirstScreen,
       navigationOptions: {
-        title: "Home"
+        title: "FirstScreen"
       }
     },
     Settings: {
