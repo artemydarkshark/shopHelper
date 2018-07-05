@@ -3,13 +3,11 @@ import { handleActions } from "redux-actions";
 import { Record } from "immutable";
 import type { RecordFactory, RecordOf } from "immutable";
 import type { Payload } from "../types";
-import actions from "../actions";
+import * as mainActions from "../actions/mainActions";
 
 type state = {
   name: string
 };
-
-const { mainActions } = actions;
 
 const InitialState: RecordFactory<state> = Record(
   {

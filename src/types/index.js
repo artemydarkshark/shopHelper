@@ -1,8 +1,8 @@
 /* @flow */
-export type Action = {
+export type Action<P, M> = {
   type: string,
-  payload?: any,
-  meta?: any
+  payload?: P,
+  meta?: M
 };
 
 export type Payload<T> = {

@@ -5,17 +5,13 @@ import { Button } from "react-native-elements";
 
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import selectors from "../../selectors";
-import actions from "../../actions";
+import * as selectors from "../../selectors/mainSelectors";
+import * as mainActions from "../../actions/mainActions";
 import styles from "./styles";
 
-const {
-  mainSelectors: { getMainName: name }
-} = selectors;
+const { getMainName: name } = selectors;
 
-const {
-  mainActions: { changeMainName }
-} = actions;
+const { changeMainName } = mainActions;
 
 const instructions = Platform.select({
   ios: "Press Cmd+R to reload,\nCmd+D or shake for dev menu",
