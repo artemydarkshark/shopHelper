@@ -1,0 +1,128 @@
+
+<html>
+<head></head>
+<body>
+ <h1>Interview test</h1>
+ <p>You have to implement missing part of the application (`Parallel`) that making the code to be compiled and executed without exceptions and assertions in browser console.</p>
+ <script>
+ /*
+ * You have to implement missing part of the application that making code below (which untouchble) 
+ * to be compiled and executed without exceptions and assertions.
+ */
+const LOG = true;
+class Parallel {
+  	constructor( obj ){
+				this._parallelJobs = obj.parallelJobs;
+				this._runningPromises = 0;
+				this._registeredJobs = 0;
+				this._runResults = [];
+				this._waitingCallbacks = [];
+				this._doneCallbacks = [];
+		}
+	
+		_callDoneCallback( doneCallback ){
+				doneCallback( this._runResults );
+		}
+		
+		_completeJob( jobIndex, result ){
+				if( LOG ){
+						console.log( "Resolved promise: " + jobIndex );
+				}
+				this._runningPromises--;
+				this._runResults[ jobIndex ] = result;
+				const nextJob = this._waitingCallbacks.shift();
+				if( nextJob ){
+						this._runPromise( nextJob );
+				}
+				if( !this._runningPromises ){
+						const doneCallback = this._doneCallbacks.shift();
+						if( doneCallback ){
+								this._callDoneCallback( doneCallback );
+						}
+				}
+		}
+	
+		_runPromise( jobFn ){
+				if( LOG ){
+			    	console.log( "Running promise: " + this._registeredJobs );
+				}
+				new Promise( resolve => jobFn( resolve ) ).then( 
+					this._completeJob.bind( this, this._registeredJobs++ ) 
+				);
+				this._runningPromises++;
+		}
+	
+		job( jobFn ){
+				if( this._runningPromises < this._parallelJobs ){
+						this._runPromise( jobFn );
+				}
+				else{
+						this._waitingCallbacks.push( jobFn );
+				}
+				return this;
+		}
+		
+		done( callback ){
+				if( this._runningPromises ){
+						this._doneCallbacks.push( callback );
+				}
+				else{
+						this._callDoneCallback( callback );
+				}
+		}
+}
+
+ </script>
+ <script>
+ /************************************************
+  Please don`t change the code bellow this line 
+ ************************************************/
+ var runner = new Parallel({
+  parallelJobs: 2
+ });
+
+ runner.job(step1)
+  .job(step2)
+  .job(step3)
+  .job(step4)
+  .done(onDone);
+
+ function step1(done) {
+  console.log('step1');
+  setTimeout(done, 5100, 'hello world');
+ }
+
+ function step2(done) {
+  console.log('step2');
+  setTimeout(done, 100, 'Job succeded');
+ }
+
+ function step3(done) {
+  console.log('step3');
+  setTimeout(done, 5100, 'step3');
+ }
+
+ function step4(done) {
+  console.log('step4');
+  setTimeout(done, 100, 'step4');
+ }
+
+ var isPassed = false;
+ function onDone(results) {
+  console.log('onDone', results);
+  console.assert(Array.isArray(results), 'expect result to be array');
+  console.assert(results[0] === 'hello world', 'Wrong answer 1');
+  console.assert(results[1] === 'Job succeded', 'Wrong answer 2');
+  console.assert(results[2] === 'step3', 'Wrong answer 3');
+  console.assert(results[3] === 'step4', 'Wrong answer 4');
+  console.log('Thanks, all works fine');
+  isPassed = true;
+ }
+
+ setTimeout(function(){
+  if(isPassed) return;
+  console.error('Test is not done.');
+ }, 10000);
+ </script>
+</body>
+</html>

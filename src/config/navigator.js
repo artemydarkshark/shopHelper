@@ -5,10 +5,7 @@ import Settings from "../components/Settings";
 export const Navigator = StackNavigator(
   {
     Home: {
-      screen: FirstScreen,
-      navigationOptions: {
-        title: "FirstScreen"
-      }
+      screen: FirstScreen
     },
     Settings: {
       screen: Settings,
