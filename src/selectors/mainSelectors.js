@@ -9,3 +9,7 @@ export const getMainName = createSelector(getMainState, main =>
 export const getCurrentDate = createSelector(getMainState, main =>
   main.get("currentDate")
 );
+
+export const getIsDatePickerOpen = createSelector(getMainState, main =>
+  main.get("isDatePickerOpen")
+);

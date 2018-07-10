@@ -8,25 +8,34 @@ import * as mainActions from "../actions/mainActions";
 
 type state = {
   name: string,
-  currentDate: string
+  currentDate: string,
+  isDatePickerOpen: boolean
 };
+
+const timeModel: string = "DD.MM.YYYY";
 
 const InitialState: RecordFactory<state> = Record(
   {
     name: "vadJs",
-    currentDate: moment().format("DD.MM.YYYY")
+    currentDate: moment().format(timeModel),
+    isDatePickerOpen: false
   },
   "mainReducerState"
 );
+
+const handleOpenDatePicker = (state): RecordOf<state> => {
+  console.log("eeee");
+  return state.set("isDatePickerOpen", true);
+};
 
 const handleIncreaseDate = (state): RecordOf<state> => {
   const currTime = state.get("currentDate");
 
   return state.set(
     "currentDate",
-    moment(currTime)
-      .add(24, "h")
-      .format("DD.MM.YYYY")
+    moment(currTime, timeModel)
+      .add(1, "d")
+      .format(timeModel)
   );
 };
 
@@ -35,9 +44,9 @@ const handleDecreaseDate = (state): RecordOf<state> => {
 
   return state.set(
     "currentDate",
-    moment(currTime)
-      .subtract(24, "h")
-      .format("DD.MM.YYYY")
+    moment(currTime, timeModel)
+      .subtract(1, "d")
+      .format(timeModel)
   );
 };
 
@@ -46,11 +55,19 @@ const handleChangeMainName = (
   { payload }: Payload<string>
 ): RecordOf<state> => state.set("name", payload);
 
+const handleSetCurrent = (
+  state,
+  { payload }: Payload<string>
+): RecordOf<state> =>
+  state.set("currentDate", moment(payload, timeModel).format(timeModel));
+
 export default handleActions(
   {
     [mainActions.changeDate.increase]: handleIncreaseDate,
     [mainActions.changeDate.decrease]: handleDecreaseDate,
-    [mainActions.changeMainName]: handleChangeMainName
+    [mainActions.changeDate.setCurrent]: handleSetCurrent,
+    [mainActions.changeMainName]: handleChangeMainName,
+    [mainActions.openDatePicker]: handleOpenDatePicker
   },
   new InitialState()
 );

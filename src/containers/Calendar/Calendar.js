@@ -7,24 +7,29 @@ import styles from "./styles";
 
 class LogoTitle extends React.PureComponent {
   render() {
-    const { currDate, increaseDate, decreaseDate } = this.props;
+    const { currDate, increaseDate, decreaseDate, openDatePicker } = this.props;
     return (
       <View style={styles.container}>
         <Icon
           name="angle-left"
           size={iconSize * 1.4}
           color="#fff"
-          onPress={increaseDate}
+          onPress={decreaseDate}
         />
         <View style={styles.dateTime}>
           <Text style={{ color: "#fff", fontWeight: "bold" }}>{currDate}</Text>
-          <Icon name="calendar" size={iconSize * 1.2} color="#fff" />
+          <Icon
+            name="calendar"
+            size={iconSize * 1.2}
+            color="#fff"
+            onPress={openDatePicker}
+          />
         </View>
         <Icon
           name="angle-right"
           size={iconSize * 1.4}
           color="#fff"
-          onPress={decreaseDate}
+          onPress={increaseDate}
         />
       </View>
     );

@@ -9,6 +9,9 @@ export const changeMainName = createAction(
 export const { changeDate } = createActions({
   changeDate: {
     INCREASE: payload => payload,
-    DECREASE: payload => payload
+    DECREASE: payload => payload,
+    setCurrent: payload => payload
   }
 });
+
+export const openDatePicker = createAction("OPEN_DATE_PICKER");
