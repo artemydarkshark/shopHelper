@@ -1,15 +1,11 @@
 /* @flow */
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import {
-  getCurrentDate,
-  getIsDatePickerOpen
-} from "../../selectors/mainSelectors";
+import { getIsDatePickerOpen } from "../../selectors/mainSelectors";
 import { changeDate } from "../../actions/mainActions";
 import FirstScreen from "./FirstScreen";
 
 const mapStateToProps = createStructuredSelector({
-  currentDate: getCurrentDate,
   showDatePicker: getIsDatePickerOpen
 });
 

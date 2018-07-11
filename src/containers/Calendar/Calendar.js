@@ -2,12 +2,14 @@
 import React from "react";
 import { View, Text } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import DatePicker from "react-native-datepicker";
 import { iconSize } from "../../config/commonSizes";
+
 import styles from "./styles";
 
 class LogoTitle extends React.PureComponent {
   render() {
-    const { currDate, increaseDate, decreaseDate, openDatePicker } = this.props;
+    const { currDate, increaseDate, decreaseDate, setCurrent } = this.props;
     return (
       <View style={styles.container}>
         <Icon
@@ -17,12 +19,12 @@ class LogoTitle extends React.PureComponent {
           onPress={decreaseDate}
         />
         <View style={styles.dateTime}>
-          <Text style={{ color: "#fff", fontWeight: "bold" }}>{currDate}</Text>
-          <Icon
-            name="calendar"
-            size={iconSize * 1.2}
-            color="#fff"
-            onPress={openDatePicker}
+          <Text style={styles.dateStyle}>{currDate}</Text>
+          <DatePicker
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            onDateChange={setCurrent}
+            hideText
           />
         </View>
         <Icon

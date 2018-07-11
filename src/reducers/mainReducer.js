@@ -5,14 +5,13 @@ import type { RecordFactory, RecordOf } from "immutable";
 import moment from "moment";
 import type { Payload } from "../types";
 import * as mainActions from "../actions/mainActions";
+import { timeModel } from "../constants";
 
 type state = {
   name: string,
   currentDate: string,
   isDatePickerOpen: boolean
 };
-
-const timeModel: string = "DD.MM.YYYY";
 
 const InitialState: RecordFactory<state> = Record(
   {
@@ -23,10 +22,8 @@ const InitialState: RecordFactory<state> = Record(
   "mainReducerState"
 );
 
-const handleOpenDatePicker = (state): RecordOf<state> => {
-  console.log("eeee");
-  return state.set("isDatePickerOpen", true);
-};
+const handleOpenDatePicker = (state): RecordOf<state> =>
+  state.set("isDatePickerOpen", true);
 
 const handleIncreaseDate = (state): RecordOf<state> => {
   const currTime = state.get("currentDate");
@@ -59,7 +56,7 @@ const handleSetCurrent = (
   state,
   { payload }: Payload<string>
 ): RecordOf<state> =>
-  state.set("currentDate", moment(payload, timeModel).format(timeModel));
+  state.set("currentDate", moment(payload).format(timeModel));
 
 export default handleActions(
   {

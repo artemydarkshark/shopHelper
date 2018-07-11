@@ -1,6 +1,6 @@
 /* @flow */
 import * as React from "react";
-import { View, ImageBackground, DatePickerIOS } from "react-native";
+import { View, ImageBackground } from "react-native";
 
 import Icon from "react-native-vector-icons/FontAwesome";
 import ShopItem from "../../containers/ShopItem";
@@ -15,33 +15,24 @@ const shops = [
   { text: "third shop", amount: "200$" }
 ];
 
+type Props = {
+  navigation: Object
+};
+
 const style = { width: "100%", height: "100%" };
 
-class FirstScreen extends React.PureComponent<{}> {
+class FirstScreen extends React.PureComponent<Props> {
   static navigationOptions = {
     headerTitle: <Calendar />,
     color: "red"
   };
-  constructor(props) {
-    super(props);
-    this.state = {
-      time: new Date()
-    };
-    this.handleTime = this.handleTime.bind(this);
-  }
-
-  handleTime(time) {
-    this.props.setCurrentDate(time);
-  }
 
   render() {
-    const { navigation, showDatePicker } = this.props;
-    const { time } = this.state;
-
+    const { navigation } = this.props;
     return (
       <View>
         <ImageBackground
-      source={require("../../img/bg.jpg")} // eslint-disable-line
+          source={require("../../img/bg.jpg")} // eslint-disable-line
           style={style}
         >
           <View style={styles.container}>
@@ -57,10 +48,6 @@ class FirstScreen extends React.PureComponent<{}> {
                 />
               </View>
             </View>
-
-            {showDatePicker ? (
-              <DatePickerIOS date={time} onDateChange={this.handleTime} />
-            ) : null}
             <Conclusion navigate={() => navigation.navigate("Settings")} />
           </View>
         </ImageBackground>

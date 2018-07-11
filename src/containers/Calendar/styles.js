@@ -13,5 +13,9 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around"
+  },
+  dateStyle: {
+    color: "#fff",
+    fontWeight: "bold"
   }
 });
