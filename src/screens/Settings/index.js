@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import Settings from "./Settings";
+
 import { getCurrentDate } from "../../selectors/mainSelectors";
 import { changeDate } from "../../actions/mainActions";
 

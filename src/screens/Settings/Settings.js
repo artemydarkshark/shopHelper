@@ -2,6 +2,7 @@
 import React from "react";
 import { View } from "react-native";
 import DatePicker from "react-native-datepicker";
+import CustomHeader from "../../components/CustomHeader";
 
 import SettingButton from "../../components/SettingButton";
 import Input from "../../components/Input";
@@ -52,7 +53,8 @@ const Settings = (props: Props) => (
 );
 
 Settings.navigationOptions = {
-  title: "Settings"
+  // title: "Settings"
+  header: props => <CustomHeader {...props} />
 };
 
 export default Settings;
