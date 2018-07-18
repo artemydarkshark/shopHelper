@@ -1,17 +1,18 @@
 // @flow
 import React from "react";
 
-import { TextInput } from "react-native";
+import { Input, Item } from "native-base";
+
+import styles from "./styles";
 
 type Props = {
   placeholder: string
 };
 
 const BaseInput = (props: Props) => (
-  <TextInput
-    placeholder={props.placeholder}
-    // inputStyle={{ color: '#000' }}
-  />
+  <Item style={styles.container}>
+    <Input style={styles.input} placeholder={props.placeholder} />
+  </Item>
 );
 
 export default BaseInput;

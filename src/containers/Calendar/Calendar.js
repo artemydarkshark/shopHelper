@@ -1,13 +1,21 @@
 /* @flow  */
-import React from "react";
-import { View, Text } from "react-native";
+import React, { PureComponent } from "react";
+import { View } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import DatePicker from "react-native-datepicker";
+
+import Date from "../../components/Date";
 import { iconSize } from "../../config/commonSizes";
 
 import styles from "./styles";
 
-class LogoTitle extends React.PureComponent {
+type Props = {
+  currDate: string,
+  increaseDate: Function,
+  decreaseDate: Function,
+  setCurrent: Function
+};
+
+class LogoTitle extends PureComponent<Props> {
   render() {
     const { currDate, increaseDate, decreaseDate, setCurrent } = this.props;
     return (
@@ -18,15 +26,12 @@ class LogoTitle extends React.PureComponent {
           color="#fff"
           onPress={decreaseDate}
         />
-        <View style={styles.dateTime}>
-          <Text style={styles.dateStyle}>{currDate}</Text>
-          <DatePicker
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
-            onDateChange={setCurrent}
-            hideText
-          />
-        </View>
+        <Date
+          currDate={currDate}
+          setCurrent={setCurrent}
+          viewStyle={styles.dateTime}
+          dateStyle={styles.dateStyle}
+        />
         <Icon
           name="angle-right"
           size={iconSize * 1.4}

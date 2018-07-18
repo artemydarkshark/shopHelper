@@ -1,7 +1,8 @@
 // @flow
 import React from "react";
 
-import { View, Button } from "react-native";
+import { View } from "react-native";
+import { Button, Text } from "native-base";
 
 import styles from "./styles";
 
@@ -11,7 +12,9 @@ type Props = {
 
 const SettingButton = (props: Props) => (
   <View style={styles.container}>
-    <Button title={props.title} />
+    <Button danger full>
+      <Text style={styles.text}>{props.title}</Text>
+    </Button>
   </View>
 );
 
