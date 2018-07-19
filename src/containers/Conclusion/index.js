@@ -17,7 +17,7 @@ const Conclusion: React.StatelessFunctionalComponent<Props> = ({
   <View style={styles.container}>
     <Icon name="cogs" size={iconSize} onPress={navigate} />
     <Text>{`${amountOfMoney} грн`}</Text>
-    <Icon name="file" size={iconSize} color="#0ff" />
+    <Icon name="file-excel-o" size={iconSize} color="#1d673d" />
   </View>
 );
 

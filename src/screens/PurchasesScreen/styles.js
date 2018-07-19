@@ -3,8 +3,8 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   purchaseContainer: {
-    justifyContent: "space-between",
     flexDirection: "column",
-    flex: 1
+    position: "relative",
+    height: "100%"
   }
 });

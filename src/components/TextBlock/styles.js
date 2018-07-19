@@ -3,6 +3,7 @@ import theme from "../../config/theme";
 
 export default StyleSheet.create({
   text: {
-    fontSize: theme.fontSizes.main
+    fontSize: theme.fontSizes.main,
+    color: theme.colors.textColor
   }
 });
