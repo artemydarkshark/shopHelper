@@ -1,13 +1,15 @@
 import React from "react";
 
 import { View } from "react-native";
+
+import AddPurchase from "../../components/AddPurchase";
 import PurchaseHeader from "../../containers/PurchaseHeader";
-import TextBlock from "../../components/TextBlock";
+
 import styles from "./styles";
 
 const PurchasesScreen = () => (
   <View style={styles.purchaseContainer}>
-    <TextBlock bold>Hello</TextBlock>
+    <AddPurchase />
   </View>
 );
 

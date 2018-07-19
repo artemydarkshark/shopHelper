@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   input: {
-    marginHorizontal: 10
+    paddingHorizontal: 10,
+    height: 30
   }
 });
