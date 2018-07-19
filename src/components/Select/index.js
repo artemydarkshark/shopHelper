@@ -17,7 +17,7 @@ export default class PickerInputExample extends Component<Props> {
     super(props);
     this.state = {
       selected2: undefined,
-      width: 0
+      width: null
     };
   }
   onValueChange2 = (value: string) => {
@@ -30,32 +30,33 @@ export default class PickerInputExample extends Component<Props> {
     const { width } = e.nativeEvent.layout;
     this.setState({ width });
   };
+
+  getOptionItem = ({ label, value, id }) => (
+    <Picker.Item label={label} value={value} key={id} />
+  );
+
   render() {
     const { placeholder, options } = this.props;
     return (
       <View style={styles.container} onLayout={this.onLayout}>
-        <Form>
-          <Item picker>
-            <Picker
-              mode="dropdown"
-              iosIcon={<Icon name="ios-arrow-down-outline" />}
-              style={{ width: this.state.width }}
-              placeholder={placeholder}
-              placeholderStyle={styles.placeholderStyle}
-              placeholderIconColor="#d32f2f"
-              selectedValue={this.state.selected2}
-              onValueChange={this.onValueChange2}
-            >
-              {options.map(item => (
-                <Picker.Item
-                  label={item.label}
-                  value={item.value}
-                  key={item.id}
-                />
-              ))}
-            </Picker>
-          </Item>
-        </Form>
+        {this.state.width !== null ? (
+          <Form>
+            <Item picker>
+              <Picker
+                mode="dropdown"
+                iosIcon={<Icon name="ios-arrow-down-outline" />}
+                style={{ width: this.state.width }}
+                placeholder={placeholder}
+                placeholderStyle={styles.placeholderStyle}
+                placeholderIconColor="#d32f2f"
+                selectedValue={this.state.selected2}
+                onValueChange={this.onValueChange2}
+              >
+                {options.map(this.getOptionItem)}
+              </Picker>
+            </Item>
+          </Form>
+        ) : null}
       </View>
     );
   }

@@ -1,11 +1,13 @@
 import { createStackNavigator } from "react-navigation";
 import FirstScreen from "../screens/FirstScreen";
 import Settings from "../screens/Settings";
+import PurchasesScreen from "../screens/PurchasesScreen";
 
 export const Navigator = createStackNavigator(
   {
     Home: FirstScreen,
-    Settings
+    Settings,
+    PurchasesScreen
   },
   {
     initialRouteName: "Home",

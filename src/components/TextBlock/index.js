@@ -5,7 +5,7 @@ import styles from "./styles";
 
 type Props = {
   children: React.Node,
-  bold: boolean,
+  bold?: boolean,
   styles?: any
 };
 
@@ -19,7 +19,8 @@ const TextBlock = (props: Props) => {
 };
 
 TextBlock.defaultProps = {
-  styles: {}
+  styles: {},
+  bold: false
 };
 
 export default TextBlock;

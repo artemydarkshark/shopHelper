@@ -27,12 +27,21 @@ class FirstScreen extends React.PureComponent<Props> {
     color: "red"
   };
 
+  goToPage = (page: string): void => {
+    this.props.navigation.navigate(page);
+  };
+
+  goToPurchasesScreen = this.goToPage.bind(null, "PurchasesScreen");
+  goToSettings = this.goToPage.bind(null, "Settings");
+
   render() {
-    const { navigation } = this.props;
+    const size = iconSize * 1.4;
+
     return (
       <View>
         <ImageBackground
-          source={require("../../img/bg.jpg")} // eslint-disable-line
+          // $FlowFixMe
+          source={require('../../img/bg.jpg')} // eslint-disable-line
           style={style}
         >
           <View style={styles.container}>
@@ -42,13 +51,14 @@ class FirstScreen extends React.PureComponent<Props> {
               ))}
               <View style={styles.plusShop}>
                 <Icon
+                  onPress={this.goToPurchasesScreen}
                   name="plus-circle"
-                  size={iconSize * 1.4}
-                  color="#ff0000"
+                  size={size}
+                  color="#f00"
                 />
               </View>
             </View>
-            <Conclusion navigate={() => navigation.navigate("Settings")} />
+            <Conclusion navigate={this.goToSettings} />
           </View>
         </ImageBackground>
       </View>
