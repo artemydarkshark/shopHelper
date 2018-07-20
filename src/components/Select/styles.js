@@ -11,5 +11,11 @@ export default StyleSheet.create({
   },
   placeholderStyle: {
     color: theme.colors.textColor
+  },
+  select: {
+    height: 30
+  },
+  selectText: {
+    paddingHorizontal: 10
   }
 });

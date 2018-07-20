@@ -9,7 +9,6 @@ export default StyleSheet.create({
     marginBottom: 20,
     justifyContent: "space-between",
     alignSelf: "flex-end",
-    // alignItems: "center",
     flexDirection: "row",
     backgroundColor: theme.colors.backgroundColor
   },

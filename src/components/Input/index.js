@@ -10,7 +10,7 @@ type Props = {
 };
 
 const BaseInput = (props: Props) => (
-  <Item style={styles.container}>
+  <Item style={styles.inputContainer}>
     <Input style={styles.input} placeholder={props.placeholder} />
   </Item>
 );

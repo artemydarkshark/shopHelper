@@ -45,12 +45,13 @@ export default class PickerInputExample extends Component<Props> {
               <Picker
                 mode="dropdown"
                 iosIcon={<Icon name="ios-arrow-down-outline" />}
-                style={{ width: this.state.width }}
+                style={{ ...styles.select, width: this.state.width }}
                 placeholder={placeholder}
                 placeholderStyle={styles.placeholderStyle}
                 placeholderIconColor="#d32f2f"
                 selectedValue={this.state.selected2}
                 onValueChange={this.onValueChange2}
+                textStyle={{ paddingLeft: 10 }}
               >
                 {options.map(this.getOptionItem)}
               </Picker>
