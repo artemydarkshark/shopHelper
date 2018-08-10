@@ -7,10 +7,6 @@ import Input from "../../components/Input";
 
 import styles from "./styles";
 
-// type Props = {
-//   placeholder: string
-// };
-
 const AddPurchase = () => (
   <View style={styles.item}>
     <View style={styles.inputContainer}>
@@ -19,12 +15,7 @@ const AddPurchase = () => (
     <View style={styles.inputContainer}>
       <Input placeholder="Цена 0.0 грн" />
     </View>
-    <Icon
-      // onPress={this.goToPurchasesScreen}
-      name="plus-circle"
-      size={30}
-      color="#f00"
-    />
+    <Icon name="plus-circle" size={30} color="#f00" />
   </View>
 );
 
