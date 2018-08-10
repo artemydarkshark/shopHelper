@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 
-const getMainState = store => store.get("mainReducer");
+const getMainState = store => store.mainReducer;
 
 export const getMainName = createSelector(getMainState, main =>
   main.get("name")

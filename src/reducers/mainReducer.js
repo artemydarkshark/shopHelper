@@ -13,7 +13,7 @@ type state = {
   isDatePickerOpen: boolean
 };
 
-const InitialState: RecordFactory<state> = Record(
+export const MainInitialState: RecordFactory<state> = Record(
   {
     name: "vadJs",
     currentDate: moment().format(timeModel),
@@ -66,5 +66,5 @@ export default handleActions(
     [mainActions.changeMainName]: handleChangeMainName,
     [mainActions.openDatePicker]: handleOpenDatePicker
   },
-  new InitialState()
+  new MainInitialState()
 );
