@@ -1,38 +1,21 @@
-import { StyleSheet } from 'react-native';
-import theme from '../../config/theme';
+import { StyleSheet } from "react-native";
+import theme from "../../config/theme";
 
 export default StyleSheet.create({
   container: {
-    padding: 10,
-    position: 'relative',
+    position: "relative",
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between"
   },
-  button: {
-    margin: 10,
-    borderBottomWidth: 2,
-    borderBottomColor: theme.colors.inputColor,
-    padding: 10,
-    position: 'relative',
+  placeholderStyle: {
+    color: theme.colors.textColor
   },
-
-  text: {
-    fontSize: 18,
-    color: theme.colors.inputColor,
+  select: {
+    height: 30
   },
-  dropdownStyle: {
-    position: 'absolute',
-    width: '95%',
-    marginLeft: -12,
-    marginTop: 12,
-    height: 100,
-    // overflow: 'scroll',
-  },
-  dropdownTextStyle: {
-    fontSize: 18,
-    color: '#000',
-  },
-  label: {
-    position: 'absolute',
-    top: '50%',
-    right: '10%',
-  },
+  selectText: {
+    paddingHorizontal: 10
+  }
 });

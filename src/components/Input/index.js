@@ -1,35 +1,18 @@
 // @flow
 import React from "react";
 
-import { RkTextInput, RkTheme } from "react-native-ui-kitten";
-import theme from "../../config/theme";
+import { Input, Item } from "native-base";
+
+import styles from "./styles";
 
 type Props = {
   placeholder: string
 };
 
-RkTheme.setType("RkTextInput", "input", {
-  input: {
-    marginLeft: 0,
-    paddingHorizontal: 10,
-    fontSize: 18,
-    borderRadius: 5
-  },
-  color: "gray",
-  container: {
-    marginHorizontal: 10,
-    underlineWidth: 1,
-    underlineColor: theme.colors.textColor
-  }
-});
-
 const BaseInput = (props: Props) => (
-  <RkTextInput
-    placeholder={props.placeholder}
-    rkType="input"
-    props={{ placeholderTextColor: "#FFF" }}
-    // inputStyle={{ color: '#000' }}
-  />
+  <Item style={styles.inputContainer}>
+    <Input style={styles.input} placeholder={props.placeholder} />
+  </Item>
 );
 
 export default BaseInput;

@@ -1,7 +1,15 @@
 import { createSelector } from "reselect";
 
-const getMainState = store => store.get("mainReducer");
+const getMainState = store => store.mainReducer;
 
 export const getMainName = createSelector(getMainState, main =>
   main.get("name")
+);
+
+export const getCurrentDate = createSelector(getMainState, main =>
+  main.get("currentDate")
+);
+
+export const getIsDatePickerOpen = createSelector(getMainState, main =>
+  main.get("isDatePickerOpen")
 );

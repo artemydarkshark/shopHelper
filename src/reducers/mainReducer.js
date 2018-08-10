@@ -2,28 +2,69 @@
 import { handleActions } from "redux-actions";
 import { Record } from "immutable";
 import type { RecordFactory, RecordOf } from "immutable";
+import moment from "moment";
 import type { Payload } from "../types";
 import * as mainActions from "../actions/mainActions";
+import { timeModel } from "../constants";
 
 type state = {
-  name: string
+  name: string,
+  currentDate: string,
+  isDatePickerOpen: boolean
 };
 
-const InitialState: RecordFactory<state> = Record(
+export const MainInitialState: RecordFactory<state> = Record(
   {
-    name: "vadJs"
+    name: "vadJs",
+    currentDate: moment().format(timeModel),
+    isDatePickerOpen: false
   },
   "mainReducerState"
 );
+
+const handleOpenDatePicker = (state): RecordOf<state> =>
+  state.set("isDatePickerOpen", true);
+
+const handleIncreaseDate = (state): RecordOf<state> => {
+  const currTime = state.get("currentDate");
+
+  return state.set(
+    "currentDate",
+    moment(currTime, timeModel)
+      .add(1, "d")
+      .format(timeModel)
+  );
+};
+
+const handleDecreaseDate = (state): RecordOf<state> => {
+  const currTime = state.get("currentDate");
+
+  return state.set(
+    "currentDate",
+    moment(currTime, timeModel)
+      .subtract(1, "d")
+      .format(timeModel)
+  );
+};
 
 const handleChangeMainName = (
   state,
   { payload }: Payload<string>
 ): RecordOf<state> => state.set("name", payload);
 
+const handleSetCurrent = (
+  state,
+  { payload }: Payload<string>
+): RecordOf<state> =>
+  state.set("currentDate", moment(payload).format(timeModel));
+
 export default handleActions(
   {
-    [mainActions.changeMainName]: handleChangeMainName
+    [mainActions.changeDate.increase]: handleIncreaseDate,
+    [mainActions.changeDate.decrease]: handleDecreaseDate,
+    [mainActions.changeDate.setCurrent]: handleSetCurrent,
+    [mainActions.changeMainName]: handleChangeMainName,
+    [mainActions.openDatePicker]: handleOpenDatePicker
   },
-  new InitialState()
+  new MainInitialState()
 );

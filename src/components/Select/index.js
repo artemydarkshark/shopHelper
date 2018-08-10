@@ -1,45 +1,64 @@
-import React from 'react';
-import ModalDropdown from 'react-native-modal-dropdown';
-import { View } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React, { Component } from "react";
+import { Form, Item, Picker, Icon } from "native-base";
+import { View } from "react-native";
+import styles from "./styles";
 
-import styles from './styles';
-
-class Select extends React.PureComponent {
-  constructor(props) {
+interface Langs {
+  id: string;
+  label: string;
+  value: string;
+}
+type Props = {
+  placeholder: string,
+  options: Array<Langs>
+};
+export default class PickerInputExample extends Component<Props> {
+  constructor(props: Props) {
     super(props);
     this.state = {
-      height: 0,
+      selected2: undefined,
+      width: null
     };
   }
-
-  onLayout = (event) => {
-    const { height } = event.nativeEvent.layout;
-    this.setState({ height });
+  onValueChange2 = (value: string) => {
+    this.setState({
+      selected2: value
+    });
   };
 
-  render() {
-    const { height } = this.state;
+  onLayout = e => {
+    const { width } = e.nativeEvent.layout;
+    this.setState({ width });
+  };
 
+  getOptionItem = ({ label, value, id }) => (
+    <Picker.Item label={label} value={value} key={id} />
+  );
+
+  render() {
+    const { placeholder, options } = this.props;
     return (
-      <View>
-        <View
-          onLayout={this.onLayout}
-          style={[styles.label, { transform: [{ translateY: -height / 2 }] }]}
-        >
-          <Icon name="angle-down" styles={styles.icon} size={30} />
-        </View>
-        <ModalDropdown
-          style={styles.button}
-          textStyle={styles.text}
-          dropdownStyle={styles.dropdownStyle}
-          dropdownTextStyle={styles.dropdownTextStyle}
-          options={['Russian', 'English']}
-          renderSeparator={() => false}
-        />
+      <View style={styles.container} onLayout={this.onLayout}>
+        {this.state.width !== null ? (
+          <Form>
+            <Item picker>
+              <Picker
+                mode="dropdown"
+                iosIcon={<Icon name="ios-arrow-down-outline" />}
+                style={{ ...styles.select, width: this.state.width }}
+                placeholder={placeholder}
+                placeholderStyle={styles.placeholderStyle}
+                placeholderIconColor="#d32f2f"
+                selectedValue={this.state.selected2}
+                onValueChange={this.onValueChange2}
+                textStyle={{ paddingLeft: 10 }}
+              >
+                {options.map(this.getOptionItem)}
+              </Picker>
+            </Item>
+          </Form>
+        ) : null}
       </View>
     );
   }
 }
-
-export default Select;

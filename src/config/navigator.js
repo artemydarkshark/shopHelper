@@ -1,28 +1,23 @@
-import { StackNavigator } from "react-navigation";
+import { createStackNavigator } from "react-navigation";
 import FirstScreen from "../screens/FirstScreen";
-import Settings from "../components/Settings";
+import Settings from "../screens/Settings";
+import PurchasesScreen from "../screens/PurchasesScreen";
 
-export const Navigator = StackNavigator(
+export const Navigator = createStackNavigator(
   {
-    Home: {
-      screen: FirstScreen,
-      navigationOptions: {
-        title: "FirstScreen"
-      }
-    },
-    Settings: {
-      screen: Settings,
-      navigationOptions: {
-        title: "Settings"
-      }
-    }
+    Home: FirstScreen,
+    Settings,
+    PurchasesScreen
   },
   {
+    initialRouteName: "Home",
     navigationOptions: {
-      headerBackTitle: null,
-      headerTintColor: "#fff",
       headerStyle: {
-        backgroundColor: "#d32f2f"
+        backgroundColor: "#f4511e"
+      },
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        fontWeight: "bold"
       }
     }
   }
