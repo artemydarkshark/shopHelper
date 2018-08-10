@@ -1,3 +1,4 @@
+// @flow
 import React from "react";
 import DatePicker from "react-native-datepicker";
 import { View, Text } from "react-native";

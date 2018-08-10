@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from "react";
 import { Form, Item, Picker, Icon } from "native-base";
 import { View } from "react-native";
