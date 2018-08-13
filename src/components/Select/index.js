@@ -13,12 +13,17 @@ type Props = {
   placeholder: string,
   options: Array<Langs>
 };
-export default class PickerInputExample extends Component<Props> {
+
+type State = {
+  selected2: string,
+  width: number
+};
+export default class PickerInputExample extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      selected2: undefined,
-      width: null
+      selected2: "",
+      width: 0
     };
   }
   onValueChange2 = (value: string) => {
