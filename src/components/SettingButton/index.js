@@ -7,12 +7,13 @@ import { Button, Text } from "native-base";
 import styles from "./styles";
 
 type Props = {
-  title: string
+  title: string,
+  onPress: Function
 };
 
 const SettingButton = (props: Props) => (
   <View style={styles.container}>
-    <Button danger full>
+    <Button onPress={props.onPress} danger full>
       <Text style={styles.text}>{props.title}</Text>
     </Button>
   </View>
