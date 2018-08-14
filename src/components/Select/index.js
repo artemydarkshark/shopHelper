@@ -32,14 +32,20 @@ export default class PickerInputExample extends Component<Props, State> {
     });
   };
 
-  onLayout = e => {
+  onLayout = (e: any) => {
     const { width } = e.nativeEvent.layout;
     this.setState({ width });
   };
 
-  getOptionItem = ({ label, value, id }) => (
-    <Picker.Item label={label} value={value} key={id} />
-  );
+  getOptionItem = ({
+    label,
+    value,
+    id
+  }: {
+    label: string,
+    value: string,
+    id: string
+  }) => <Picker.Item label={label} value={value} key={id} />;
 
   render() {
     const { placeholder, options } = this.props;

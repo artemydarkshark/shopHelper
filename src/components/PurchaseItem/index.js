@@ -7,7 +7,11 @@ import Input from "../Input";
 import TextBlock from "../TextBlock";
 import styles from "./styles";
 
-const PurchaseItem = () => (
+type Props = {
+  goToPage: any
+};
+
+const PurchaseItem = (props: Props) => (
   <View style={styles.itemContainer}>
     <View style={styles.itemHeader}>
       <TextBlock styles={styles.title} bold>
@@ -18,7 +22,12 @@ const PurchaseItem = () => (
     </View>
     <View style={styles.itemContent}>
       <View>
-        <Icon name="picture-o" color="#8b8b8b" size={155} />
+        <Icon
+          onPress={() => props.goToPage("Camera")}
+          name="picture-o"
+          color="#8b8b8b"
+          size={155}
+        />
       </View>
       <View style={styles.itemConsumption}>
         <Input placeholder="Кол-во 0.0 шт." />
