@@ -2,23 +2,31 @@
 import { handleActions } from "redux-actions";
 import { Record, List } from "immutable";
 import type { RecordFactory, RecordOf } from "immutable";
-import type { Payload } from "../types";
+import uuid from "uuid";
 
-import * as shopDateActions from "../actions/shopDateActions";
+import type { Payload, ShopItem } from "../types";
 
-type dateItem = Map<string, any>;
+import * as shoppingActions from "../actions/shoppingActions";
 
+const dateItem: RecordFactory<ShopItem> = Record(
+  {
+    id: uuid(),
+    name: "Покупка",
+    totalAmount: 0
+  },
+  "shopItem"
+);
 type dateList = List<dateItem>;
 
 type state = {
   dates: Map<string, dateList>
 };
 
-export const ShoppingDateState: RecordFactory<state> = Record(
+export const ShoppingState: RecordFactory<state> = Record(
   {
     dates: new Map()
   },
-  "shoppingDateState"
+  "shoppingState"
 );
 
 const addShop = (state, { payload }: Payload<string>): RecordOf<state> =>
@@ -28,7 +36,7 @@ const addShop = (state, { payload }: Payload<string>): RecordOf<state> =>
 
 export default handleActions(
   {
-    [shopDateActions.addDate]: addShop
+    [shoppingActions.addDate]: addShop
   },
-  new ShoppingDateState()
+  new ShoppingState()
 );

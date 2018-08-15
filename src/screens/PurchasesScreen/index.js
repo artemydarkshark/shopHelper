@@ -2,7 +2,7 @@ import React from "react";
 
 import { View } from "react-native";
 
-import AddPurchase from "../../components/AddPurchase";
+import AddPurchase from "../../containers/AddPurchase";
 import PurchaseHeader from "../../containers/PurchaseHeader";
 import PurchaseItem from "../../components/PurchaseItem";
 import PurchaseFooter from "../../components/PurchaseFooter";

@@ -27,7 +27,7 @@ const Settings = (props: Props) => (
     </TextBlock>
     <Input placeholder="Гривны" />
     <Select placeholder="Language" options={languages} />
-    <SettingButton title="Сохранить" />
+    <SettingButton onPress={() => {}} title="Сохранить" />
     <View style={styles.dateContainer}>
       <TextBlock>Удалить все записи по: </TextBlock>
       <DatePicker
@@ -41,13 +41,13 @@ const Settings = (props: Props) => (
         onDateChange={props.setCurrent}
       />
     </View>
-    <SettingButton title="Удалить" />
+    <SettingButton onPress={() => {}} title="Удалить" />
     <TextBlock styles={styles.header} bold>
       Настройки отчётов
     </TextBlock>
     <Input placeholder="example@gmail.com" />
     <Input placeholder="Отчёт о закупках" />
-    <SettingButton title="Сохранить" />
+    <SettingButton onPress={() => {}} title="Сохранить" />
   </View>
 );
 

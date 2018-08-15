@@ -6,14 +6,12 @@ import storage from "redux-persist/lib/storage";
 import autoMergeLevel2Immutable from "../config/autoMergeLevel2Immutable";
 
 import mainReducer, { MainInitialState } from "../reducers/mainReducer";
-import shopDateReducer, {
-  ShoppingDateState
-} from "../reducers/shoppingDateReducer";
+import shopDateReducer, { ShoppingState } from "../reducers/shoppingReducer";
 
 const persistConfig = {
   key: "root",
   transforms: [
-    immutableTransform({ records: [MainInitialState, ShoppingDateState] })
+    immutableTransform({ records: [MainInitialState, ShoppingState] })
   ],
   stateReconciler: autoMergeLevel2Immutable,
   storage
