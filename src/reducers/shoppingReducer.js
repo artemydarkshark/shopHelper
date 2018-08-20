@@ -1,14 +1,17 @@
 /* @flow */
 import { handleActions } from "redux-actions";
-import { Record, List } from "immutable";
+import { Record, List, Map } from "immutable";
 import type { RecordFactory, RecordOf } from "immutable";
+import moment from "moment";
 import uuid from "uuid";
+
+import { timeModel } from "../constants";
 
 import type { Payload, ShopItem } from "../types";
 
 import * as shoppingActions from "../actions/shoppingActions";
 
-const dateItem: RecordFactory<ShopItem> = Record(
+const DateItem: RecordFactory<ShopItem> = Record(
   {
     id: uuid(),
     name: "Покупка",
@@ -16,7 +19,7 @@ const dateItem: RecordFactory<ShopItem> = Record(
   },
   "shopItem"
 );
-type dateList = List<dateItem>;
+type dateList = List<DateItem>;
 
 type state = {
   dates: Map<string, dateList>
@@ -24,19 +27,20 @@ type state = {
 
 export const ShoppingState: RecordFactory<state> = Record(
   {
-    dates: new Map()
+    dates: Map()
   },
   "shoppingState"
 );
 
-const addShop = (state, { payload }: Payload<string>): RecordOf<state> =>
-  payload.date
-    ? state.setIn(["dates", payload.date], { id: "1", name: "3" })
-    : state;
-
+const addShop = (state, { payload }: Payload<string>): RecordOf<state> => {
+  const date = payload.date ? payload.date : moment().format(timeModel);
+  const list = state.getIn(["dates", date], List());
+  const updateList = list.push(new DateItem({ id: uuid() }));
+  return state.setIn(["dates", date], updateList);
+};
 export default handleActions(
   {
-    [shoppingActions.addDate]: addShop
+    [shoppingActions.addShop]: addShop
   },
   new ShoppingState()
 );

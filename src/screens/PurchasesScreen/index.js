@@ -1,35 +1,21 @@
-import React from "react";
+// @flow
 
-import { View } from "react-native";
+import { connect } from "react-redux";
+import PurchasesScreen from "./PurchasesScreen";
+import { getCurrentDate } from "../../selectors/mainSelectors";
+import { getShopList } from "../../selectors/shoppingSelectors";
+import { addShop } from "../../actions/shoppingActions";
 
-import AddPurchase from "../../containers/AddPurchase";
-import PurchaseHeader from "../../containers/PurchaseHeader";
-import PurchaseItem from "../../components/PurchaseItem";
-import PurchaseFooter from "../../components/PurchaseFooter";
+const mapStateToProps = state => ({
+  currentDate: getCurrentDate(state),
+  currentShops: getShopList(state)
+});
 
-import styles from "./styles";
-
-class PurchasesScreen extends React.Component {
-  goToPage = (page: string): void => {
-    this.props.navigation.navigate(page);
-  };
-
-  render() {
-    return (
-      <View style={styles.purchaseContainer}>
-        <AddPurchase />
-        <View>
-          <PurchaseItem goToPage={this.goToPage} />
-          <PurchaseItem goToPage={this.goToPage} />
-        </View>
-        <PurchaseFooter />
-      </View>
-    );
-  }
-}
-
-PurchasesScreen.navigationOptions = {
-  headerTitle: props => <PurchaseHeader {...props} />
+const mapDispatchToProps = {
+  addShop
 };
 
-export default PurchasesScreen;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PurchasesScreen);

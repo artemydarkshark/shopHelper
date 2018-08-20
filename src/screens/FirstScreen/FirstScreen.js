@@ -9,14 +9,9 @@ import Calendar from "../../containers/Calendar";
 import { iconSize } from "../../config/commonSizes";
 import styles from "./styles";
 
-const shops = [
-  { text: "first shop", amount: "50$" },
-  { text: "second shop", amount: "100$" },
-  { text: "third shop", amount: "200$" }
-];
-
 type Props = {
-  navigation: Object
+  navigation: Object,
+  currentShops: any
 };
 
 const style = { width: "100%", height: "100%" };
@@ -27,6 +22,16 @@ class FirstScreen extends React.PureComponent<Props> {
     color: "red"
   };
 
+  currentShopsMapper = () => {
+    if (!this.props.currentShops) return null;
+    return this.props.currentShops.map(item => (
+      <ShopItem
+        key={item.get("id")}
+        text={item.get("name")}
+        amount={item.get("totalAmount")}
+      />
+    ));
+  };
   goToPage = (page: string): void => {
     this.props.navigation.navigate(page);
   };
@@ -41,14 +46,12 @@ class FirstScreen extends React.PureComponent<Props> {
       <View>
         <ImageBackground
           // $FlowFixMe
-          source={require('../../img/bg.jpg')} // eslint-disable-line
+          source={require("../../img/bg.jpg")} // eslint-disable-line
           style={style}
         >
           <View style={styles.container}>
             <View>
-              {shops.map(({ text, amount }) => (
-                <ShopItem key={text} text={text} amount={amount} />
-              ))}
+              {this.currentShopsMapper()}
               <View style={styles.plusShop}>
                 <Icon
                   onPress={this.goToPurchasesScreen}

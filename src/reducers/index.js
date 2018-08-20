@@ -6,7 +6,7 @@ import storage from "redux-persist/lib/storage";
 import autoMergeLevel2Immutable from "../config/autoMergeLevel2Immutable";
 
 import mainReducer, { MainInitialState } from "../reducers/mainReducer";
-import shopDateReducer, { ShoppingState } from "../reducers/shoppingReducer";
+import shopingReducer, { ShoppingState } from "../reducers/shoppingReducer";
 
 const persistConfig = {
   key: "root",
@@ -19,5 +19,5 @@ const persistConfig = {
 
 export default persistCombineReducers(persistConfig, {
   mainReducer,
-  shopDateReducer
+  shopingReducer
 });
