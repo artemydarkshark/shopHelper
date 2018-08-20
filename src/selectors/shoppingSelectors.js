@@ -7,5 +7,9 @@ const getShopingState = store => store.shopingReducer;
 
 export const getShopList = createSelector(
   [getShopingState, getCurrentDate],
-  (shops, date) => shops.getIn(["dates", date], List())
+  (shops, date) => {
+    const shopsList = shops.getIn(["dates", date], List());
+    console.log(JSON.stringify(shopsList));
+    return shopsList;
+  }
 );
