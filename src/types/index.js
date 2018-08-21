@@ -14,3 +14,13 @@ export type ShopItem = {
   name: string,
   totalAmount: number
 };
+
+export type PurchaseItem = {
+  id: string,
+  name: string,
+  price: number,
+  quantity: number,
+  photoUri: string,
+  barCode: string,
+  amount: number
+};

@@ -12,28 +12,48 @@ import styles from "./styles";
 type Props = {
   currentDate: string,
   currentShops: any,
-  addShop: Function
+  purchases: any,
+  createPurchase: Function
 };
 
 class PurchasesScreen extends React.Component<Props> {
-  componentDidMount() {
-    console.log(this.props.currentShops);
-  }
-
   goToPage = (page: string): void => {
     this.props.navigation.navigate(page);
   };
 
+  purchaseItemMapper = () =>
+    this.props.purchases
+      ? this.props.purchases.map(item => {
+          const id = item.get("id");
+          return (
+            <PurchaseItem
+              key={id}
+              id={id}
+              name={item.get("name")}
+              price={item.get("price")}
+              quantity={item.get("quantity")}
+              photoUri={item.get("photoUri")}
+              amount={item.get("amount")}
+              goToPage={this.goToPage}
+            />
+          );
+        })
+      : null;
+
   render() {
+    const id = this.props.navigation.getParam("id");
+
     return (
       <View style={styles.purchaseContainer}>
         <AddPurchase
-          addShop={this.props.addShop}
+          id={id}
+          createPurchase={this.props.createPurchase}
           currentDate={this.props.currentDate}
         />
         <View>
-          <PurchaseItem goToPage={this.goToPage} />
-          <PurchaseItem goToPage={this.goToPage} />
+          {/* <PurchaseItem goToPage={this.goToPage} />
+          <PurchaseItem goToPage={this.goToPage} /> */}
+          {this.purchaseItemMapper()}
         </View>
         <PurchaseFooter />
       </View>

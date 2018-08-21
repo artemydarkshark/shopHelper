@@ -7,7 +7,6 @@ import Input from "../../components/Input";
 import styles from "./styles";
 
 class AddPurchase extends PureComponent {
-  addShop = () => console.log("add");
   render() {
     return (
       <View style={styles.item}>
@@ -21,7 +20,7 @@ class AddPurchase extends PureComponent {
           name="plus-circle"
           size={30}
           color="#f00"
-          onPress={() => this.props.addShop({ date: this.props.currentDate })}
+          onPress={() => this.props.createPurchase(this.props.id)}
         />
       </View>
     );

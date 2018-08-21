@@ -11,7 +11,9 @@ import styles from "./styles";
 
 type Props = {
   navigation: Object,
-  currentShops: any
+  createShop: Function,
+  currentShops: any,
+  shopsPurchases: Object
 };
 
 const style = { width: "100%", height: "100%" };
@@ -23,20 +25,29 @@ class FirstScreen extends React.PureComponent<Props> {
   };
 
   currentShopsMapper = () => {
-    if (!this.props.currentShops) return null;
-    return this.props.currentShops.map(item => (
-      <ShopItem
-        key={item.get("id")}
-        text={item.get("name")}
-        amount={item.get("totalAmount")}
-      />
-    ));
-  };
-  goToPage = (page: string): void => {
-    this.props.navigation.navigate(page);
+    const { currentShops, shopsPurchases } = this.props;
+
+    if (!currentShops) return null;
+    return currentShops.map(item => {
+      const id = item.get("id");
+
+      return shopsPurchases.get(id) ? (
+        <ShopItem
+          key={id}
+          id={id}
+          text={item.get("name")}
+          amount={item.get("totalAmount")}
+          goToPage={this.goToPage}
+        />
+      ) : null;
+    });
   };
 
-  goToPurchasesScreen = this.goToPage.bind(null, "PurchasesScreen");
+  goToPage = (page: string, opts: Object = {}): void => {
+    this.props.navigation.navigate(page, opts);
+  };
+
+  goToPurchasesScreen = this.goToPage.bind(null, "PurchasesScreen", { id: 1 });
   goToSettings = this.goToPage.bind(null, "Settings");
 
   render() {
@@ -54,7 +65,7 @@ class FirstScreen extends React.PureComponent<Props> {
               {this.currentShopsMapper()}
               <View style={styles.plusShop}>
                 <Icon
-                  onPress={this.goToPurchasesScreen}
+                  onPress={this.props.createShop}
                   name="plus-circle"
                   size={size}
                   color="#f00"

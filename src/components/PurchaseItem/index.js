@@ -8,14 +8,20 @@ import TextBlock from "../TextBlock";
 import styles from "./styles";
 
 type Props = {
-  goToPage: any
+  goToPage: any,
+  id: string,
+  name: string,
+  price: number,
+  quantity: number,
+  photoUri: string,
+  amount: number
 };
 
 const PurchaseItem = (props: Props) => (
   <View style={styles.itemContainer}>
     <View style={styles.itemHeader}>
       <TextBlock styles={styles.title} bold>
-        Вино “Кагор”
+        {props.name}
       </TextBlock>
       <Icon style={styles.headerIcon} name="trash-o" size={24} />
       <Icon style={styles.headerIcon} name="barcode" size={24} />
@@ -30,9 +36,9 @@ const PurchaseItem = (props: Props) => (
         />
       </View>
       <View style={styles.itemConsumption}>
-        <Input placeholder="Кол-во 0.0 шт." />
-        <Input placeholder="Цена 0.0 шт." />
-        <TextBlock>Сумма: 122 грн</TextBlock>
+        <Input placeholder="Кол-во 0.0 шт." value={props.quantity} />
+        <Input placeholder="Цена 0.0 шт." value={props.price} />
+        <TextBlock>Сумма: {props.amount}</TextBlock>
       </View>
     </View>
   </View>

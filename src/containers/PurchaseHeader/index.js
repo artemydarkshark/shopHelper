@@ -1,23 +1,21 @@
-// @flow
-import React from "react";
-import { View } from "react-native";
-import { Text } from "native-base";
+import { connect } from "react-redux";
+import PurchaseHeader from "./PurchaseHeader";
+import { getRouteId } from "../../selectors/navSelectors";
+import { getHeaderShop } from "../../selectors/shoppingSelectors";
+import { changeDate } from "../../actions/mainActions";
 
-import HeaderInput from "../../components/HeaderInput";
+const mapStateToProps = state => ({
+  id: getRouteId(state),
+  shop: getHeaderShop(state)
+});
 
-const PurchaseHeader = () => (
-  <View
-    style={{
-      paddingBottom: 15,
-      flexDirection: "row",
-      alignItems: "flex-end"
-    }}
-  >
-    <HeaderInput placeholder="Покупка" />
-    <View style={{ marginLeft: 10 }}>
-      <Text style={{ color: "#fff", fontSize: 24 }}> Σ 0.00</Text>
-    </View>
-  </View>
-);
+const mapDispatchToProps = {
+  increaseDate: changeDate.increase,
+  decreaseDate: changeDate.decrease,
+  setCurrent: changeDate.setCurrent
+};
 
-export default PurchaseHeader;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PurchaseHeader);

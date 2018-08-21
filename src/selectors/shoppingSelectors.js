@@ -2,14 +2,28 @@ import { createSelector } from "reselect";
 import { List } from "immutable";
 
 import { getCurrentDate } from "./mainSelectors";
+import { getRouteId } from "./navSelectors";
 
-const getShopingState = store => store.shopingReducer;
+const getShoppingState = store => store.shopingReducer;
 
 export const getShopList = createSelector(
-  [getShopingState, getCurrentDate],
+  [getShoppingState, getCurrentDate],
   (shops, date) => {
     const shopsList = shops.getIn(["dates", date], List());
-    console.log(JSON.stringify(shopsList));
     return shopsList;
   }
+);
+
+export const getId = (store, ownProps) => ownProps.navigation.getParam("id");
+
+export const getShopsPurchases = createSelector([getShoppingState], shops =>
+  shops.get("shops")
+);
+
+export const getPurchases = () =>
+  createSelector([getShopsPurchases, getId], (shops, id) => shops.get(id));
+
+export const getHeaderShop = createSelector(
+  [getShopList, getRouteId],
+  (shops, id) => shops.find(item => item.id === id)
 );

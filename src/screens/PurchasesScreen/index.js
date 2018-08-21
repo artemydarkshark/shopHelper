@@ -1,21 +1,28 @@
 // @flow
 
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+
 import PurchasesScreen from "./PurchasesScreen";
 import { getCurrentDate } from "../../selectors/mainSelectors";
-import { getShopList } from "../../selectors/shoppingSelectors";
-import { addShop } from "../../actions/shoppingActions";
+import { getShopList, getPurchases } from "../../selectors/shoppingSelectors";
+import { createPurchase } from "../../actions/shoppingActions";
 
-const mapStateToProps = state => ({
-  currentDate: getCurrentDate(state),
-  currentShops: getShopList(state)
-});
+const makeMapStateToProps = () => {
+  const purchases = getPurchases();
+  const mapStateToProps = createStructuredSelector({
+    currentDate: getCurrentDate,
+    currentShops: getShopList,
+    purchases
+  });
+  return mapStateToProps;
+};
 
 const mapDispatchToProps = {
-  addShop
+  createPurchase
 };
 
 export default connect(
-  mapStateToProps,
+  makeMapStateToProps(),
   mapDispatchToProps
 )(PurchasesScreen);

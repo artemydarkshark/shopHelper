@@ -7,17 +7,23 @@ import styles from "./styles";
 
 type Props = {
   text: string,
-  amount: string
+  amount: string,
+  id: string,
+  goToPage: Function
 };
 
-const ShopItem = ({ text, amount }: Props) => (
+const ShopItem = ({ text, amount, goToPage, id }: Props) => (
   <View style={styles.container}>
     <View style={styles.wrapper}>
       <Icon name="check-circle" size={iconSize} style={styles.checkCircle} />
       <Text style={styles.shopName}>{text}</Text>
       <Text style={styles.shopPrice}>{`(${amount})`}</Text>
     </View>
-    <Icon name="pencil" size={iconSize} />
+    <Icon
+      name="pencil"
+      size={iconSize}
+      onPress={() => goToPage("PurchasesScreen", { id })}
+    />
   </View>
 );
 

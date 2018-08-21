@@ -6,7 +6,8 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./styles";
 
 type Props = {
-  placeholder: string
+  placeholder: string,
+  value: string
 };
 
 const HeaderInput = (props: Props) => (
@@ -15,6 +16,7 @@ const HeaderInput = (props: Props) => (
       style={styles.input}
       placeholderTextColor="#fff"
       placeholder={props.placeholder}
+      value={props.value}
     />
     <Icon name="pencil" style={styles.icon} />
   </Item>

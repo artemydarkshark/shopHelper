@@ -2,20 +2,29 @@
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { getIsDatePickerOpen } from "../../selectors/mainSelectors";
-import { getShopList } from "../../selectors/shoppingSelectors";
+import {
+  getShopList,
+  getShopsPurchases
+} from "../../selectors/shoppingSelectors";
 import { changeDate } from "../../actions/mainActions";
+import { createShop } from "../../actions/shoppingActions";
 import FirstScreen from "./FirstScreen";
 
-const mapStateToProps = createStructuredSelector({
-  showDatePicker: getIsDatePickerOpen,
-  currentShops: getShopList
-});
+const makeMapStateToProps = () => {
+  const mapStateToProps = createStructuredSelector({
+    showDatePicker: getIsDatePickerOpen,
+    currentShops: getShopList,
+    shopsPurchases: getShopsPurchases
+  });
+  return mapStateToProps;
+};
 
 const mapDispatchToProps = {
-  setCurrentDate: changeDate.setCurrent
+  setCurrentDate: changeDate.setCurrent,
+  createShop
 };
 
 export default connect(
-  mapStateToProps,
+  makeMapStateToProps(),
   mapDispatchToProps
 )(FirstScreen);
