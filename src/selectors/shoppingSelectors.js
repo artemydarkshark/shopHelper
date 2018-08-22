@@ -23,6 +23,9 @@ export const getShopsPurchases = createSelector([getShoppingState], shops =>
 export const getPurchases = () =>
   createSelector([getShopsPurchases, getId], (shops, id) => shops.get(id));
 
+export const getCurrentShop = () =>
+  createSelector([getShopsPurchases, getId], (shops, id) => shops.get(id));
+
 export const getHeaderShop = createSelector(
   [getShopList, getRouteId],
   (shops, id) => shops.find(item => item.id === id)

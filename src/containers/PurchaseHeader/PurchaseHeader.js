@@ -5,7 +5,13 @@ import { Text } from "native-base";
 
 import HeaderInput from "../../components/HeaderInput";
 
-const PurchaseHeader = props => {
+type Props = {
+  shop: any
+};
+
+const PurchaseHeader = (props: Props) => {
+  if (!props.shop) return null;
+
   const name = props.shop.get("name");
   const totalAmount = props.shop.get("totalAmount");
   return (

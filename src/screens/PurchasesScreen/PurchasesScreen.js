@@ -1,6 +1,7 @@
 import React from "react";
 
-import { View } from "react-native";
+import { View, ScrollView } from "react-native";
+// import { List} from "native-base"
 
 import AddPurchase from "../../components/AddPurchase";
 import PurchaseHeader from "../../containers/PurchaseHeader";
@@ -11,12 +12,30 @@ import styles from "./styles";
 
 type Props = {
   currentDate: string,
-  currentShops: any,
+  shopList: any,
   purchases: any,
-  createPurchase: Function
+  createPurchase: Function,
+  deleteShop: Function,
+  updatePurchase: Function,
+  deletePurchase: Function
 };
 
 class PurchasesScreen extends React.Component<Props> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      id: props.navigation.getParam("id")
+    };
+  }
+  componentWillUnmount = () => {
+    const { purchases, shopList, deleteShop, currentDate } = this.props;
+    const currentShop = shopList.find(({ id }) => id === this.state.id);
+
+    if (!purchases) {
+      deleteShop({ date: currentDate, id: currentShop.get("id") });
+    }
+  };
+
   goToPage = (page: string): void => {
     this.props.navigation.navigate(page);
   };
@@ -29,6 +48,9 @@ class PurchasesScreen extends React.Component<Props> {
             <PurchaseItem
               key={id}
               id={id}
+              deletePurchase={this.props.deletePurchase}
+              updatePurchase={this.props.updatePurchase}
+              shopId={this.state.id}
               name={item.get("name")}
               price={item.get("price")}
               quantity={item.get("quantity")}
@@ -51,9 +73,7 @@ class PurchasesScreen extends React.Component<Props> {
           currentDate={this.props.currentDate}
         />
         <View>
-          {/* <PurchaseItem goToPage={this.goToPage} />
-          <PurchaseItem goToPage={this.goToPage} /> */}
-          {this.purchaseItemMapper()}
+          <ScrollView>{this.purchaseItemMapper()}</ScrollView>
         </View>
         <PurchaseFooter />
       </View>

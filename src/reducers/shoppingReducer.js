@@ -47,8 +47,8 @@ export const ShoppingState: RecordFactory<state> = Record(
   "shoppingState"
 );
 
-const getPurchaseList = (state, shopId) =>
-  state.getIn(["dates", shopId], List());
+const getList = (state, entity: string, id: string) =>
+  state.getIn([entity, id], List());
 
 const addShop = (
   state,
@@ -68,20 +68,57 @@ const addPurchase = (
   state,
   { payload: id }: Payload<string>
 ): RecordOf<state> => {
-  const purchaseList = getPurchaseList(state, id);
+  const purchaseList = getList(state, "shops", id);
   const updatedPurchaseList = purchaseList.push(
     new PurchaseItemState({
       id: uuid(),
       name: `Товар ${purchaseList.size + 1}`
     })
   );
+
   return state.setIn(["shops", id], updatedPurchaseList);
+};
+
+const deleteShop = (
+  state,
+  { payload: { id, date } }: Payload<{ date: string, id: string }>
+): RecordOf<state> => {
+  const shopList = getList(state, "dates", date);
+  const updatedList = shopList.filter(item => item.id !== id);
+
+  return state.setIn(["dates", date], updatedList);
+};
+const deletePurchase = (
+  state,
+  { payload: { id, shopId } }: Payload<{ shopId: string, id: string }>
+): RecordOf<state> => {
+  const shopList = getList(state, "shops", shopId);
+  const updatedList = shopList.filter(item => item.id !== id);
+
+  return state.setIn(["shops", shopId], updatedList);
+};
+
+const updatePurchase = (
+  state,
+  {
+    payload: { id, shopId, param, value }
+  }: Payload<{ shopId: string, id: string, param: string, value: any }>
+): RecordOf<state> => {
+  const shopList = getList(state, "shops", shopId);
+  const updatedList = shopList.update(
+    shopList.findIndex(item => item.id === id),
+    item => item.set(param, value)
+  );
+  return state.setIn(["shops", shopId], updatedList);
 };
 
 export default handleActions(
   {
     [shoppingActions.addShop]: addShop,
-    [shoppingActions.createPurchase]: addPurchase
+    [shoppingActions.deleteShop]: deleteShop,
+    [shoppingActions.createPurchase]: addPurchase,
+    [shoppingActions.updatePurchase]: updatePurchase,
+    [shoppingActions.deletePurchase]: deletePurchase
   },
   new ShoppingState()
 );
