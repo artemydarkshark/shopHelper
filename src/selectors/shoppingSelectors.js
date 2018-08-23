@@ -30,3 +30,7 @@ export const getHeaderShop = createSelector(
   [getShopList, getRouteId],
   (shops, id) => shops.find(item => item.id === id)
 );
+
+export const getDailyAmount = createSelector(getShopList, shopList =>
+  shopList.reduce((acc, item) => acc + item.totalAmount, 0)
+);

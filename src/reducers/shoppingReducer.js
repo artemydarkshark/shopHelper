@@ -31,7 +31,7 @@ export const PurchaseItemState: RecordFactory<PurchaseItem> = Record(
   "purchaseItem"
 );
 
-// // $FlowFixMe
+// $FlowFixMe
 Object.defineProperty(PurchaseItemState.prototype, "amount", {
   get() {
     if (!this.price) return 0;

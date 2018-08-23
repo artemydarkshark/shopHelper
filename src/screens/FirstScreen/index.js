@@ -4,6 +4,7 @@ import { createStructuredSelector } from "reselect";
 import { getIsDatePickerOpen } from "../../selectors/mainSelectors";
 import {
   getShopList,
+  getDailyAmount,
   getShopsPurchases
 } from "../../selectors/shoppingSelectors";
 import { changeDate } from "../../actions/mainActions";
@@ -14,7 +15,8 @@ const makeMapStateToProps = () => {
   const mapStateToProps = createStructuredSelector({
     showDatePicker: getIsDatePickerOpen,
     shopList: getShopList,
-    shopsPurchases: getShopsPurchases
+    shopsPurchases: getShopsPurchases,
+    amountOfMoney: getDailyAmount
   });
   return mapStateToProps;
 };

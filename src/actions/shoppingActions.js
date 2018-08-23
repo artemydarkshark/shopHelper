@@ -7,7 +7,6 @@ import type { Dispatch } from "redux";
 
 export const addShop = createAction("ADD_SHOP", payload => payload);
 export const updateShop = createAction("UPDATE_SHOP", payload => payload);
-
 export const deleteShop = createAction("DELETE_SHOP", payload => payload);
 
 export const createPurchase = createAction("ADD_PURCHASE", payload => payload);
@@ -15,7 +14,6 @@ export const updatePurchase = createAction(
   "UPDATE_PURCHASE",
   payload => payload
 );
-
 export const deletePurchase = createAction(
   "DELETE_PURCHASE",
   payload => payload
