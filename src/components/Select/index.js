@@ -11,7 +11,9 @@ interface Langs {
 }
 type Props = {
   placeholder: string,
-  options: Array<Langs>
+  options: Array<Langs>,
+  selectedValue: string,
+  onValueChange: Function
 };
 
 type State = {
@@ -22,15 +24,9 @@ export default class PickerInputExample extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      selected2: "",
       width: 0
     };
   }
-  onValueChange2 = (value: string) => {
-    this.setState({
-      selected2: value
-    });
-  };
 
   onLayout = (e: any) => {
     const { width } = e.nativeEvent.layout;
@@ -61,8 +57,8 @@ export default class PickerInputExample extends Component<Props, State> {
                 placeholder={placeholder}
                 placeholderStyle={styles.placeholderStyle}
                 placeholderIconColor="#d32f2f"
-                selectedValue={this.state.selected2}
-                onValueChange={this.onValueChange2}
+                selectedValue={this.props.selectedValue}
+                onValueChange={this.props.onValueChange}
                 textStyle={{ paddingLeft: 10 }}
               >
                 {options.map(this.getOptionItem)}

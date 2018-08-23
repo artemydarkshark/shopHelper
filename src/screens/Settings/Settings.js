@@ -38,7 +38,12 @@ class Settings extends PureComponent<Props> {
           value={this.props.currency}
           onChangeText={text => this.changeSetting("currency", text)}
         />
-        <Select placeholder="Language" options={languages} />
+        <Select
+          selectedValue={this.props.locale}
+          onValueChange={value => this.changeSetting("locale", value)}
+          placeholder="Language"
+          options={languages}
+        />
         {/* <SettingButton onPress={() => {}} title="Сохранить" /> */}
         <View style={styles.dateContainer}>
           <TextBlock>Удалить все записи по: </TextBlock>
