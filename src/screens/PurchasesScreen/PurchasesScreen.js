@@ -55,7 +55,7 @@ class PurchasesScreen extends React.Component<Props> {
               price={item.get("price")}
               quantity={item.get("quantity")}
               photoUri={item.get("photoUri")}
-              amount={item.get("amount")}
+              amount={item.amount}
               goToPage={this.goToPage}
             />
           );

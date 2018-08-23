@@ -7,7 +7,9 @@ import styles from "./styles";
 
 type Props = {
   placeholder: string,
-  value: string
+  value: string,
+  onChangeText: Function,
+  keyboardType?: string
 };
 
 const BaseInput = (props: Props) => (
@@ -16,8 +18,14 @@ const BaseInput = (props: Props) => (
       style={styles.input}
       placeholder={props.placeholder}
       value={props.value}
+      onChangeText={props.onChangeText}
+      keyboardType={props.keyboardType}
     />
   </Item>
 );
+
+BaseInput.defaultProps = {
+  keyboardType: "default"
+};
 
 export default BaseInput;

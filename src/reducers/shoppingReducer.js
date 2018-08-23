@@ -26,11 +26,18 @@ const PurchaseItemState: RecordFactory<PurchaseItem> = Record(
     price: 0.0,
     quantity: 1.0,
     photoUri: "",
-    barCode: "",
-    amount: 0.0
+    barCode: ""
   },
   "purchaseItem"
 );
+
+// $FlowFixMe
+Object.defineProperty(PurchaseItemState.prototype, "amount", {
+  get() {
+    if (!this.price) return 0;
+    return this.price * this.quantity;
+  }
+});
 
 type PurchaseList = List<PurchaseItemState>;
 
@@ -66,13 +73,18 @@ const addShop = (
 
 const addPurchase = (
   state,
-  { payload: id }: Payload<string>
+  {
+    payload: { id, price, quantity }
+  }: Payload<{ id: string, price: string, quantity: string }>
 ): RecordOf<state> => {
   const purchaseList = getList(state, "shops", id);
-  const updatedPurchaseList = purchaseList.push(
+
+  const updatedPurchaseList = purchaseList.unshift(
     new PurchaseItemState({
       id: uuid(),
-      name: `Товар ${purchaseList.size + 1}`
+      name: `Товар ${purchaseList.size + 1}`,
+      price: +price,
+      quantity: +quantity
     })
   );
 

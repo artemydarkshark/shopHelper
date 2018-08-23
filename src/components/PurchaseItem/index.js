@@ -27,6 +27,11 @@ class PurchaseItem extends PureComponent<Props> {
     const { id, shopId, deletePurchase } = this.props;
     deletePurchase({ id, shopId });
   };
+
+  handleChangeInput = (name: string, text: string): void => {
+    const { id, shopId, updatePurchase } = this.props;
+    updatePurchase({ id, shopId, param: name, value: text });
+  };
   render() {
     return (
       <View style={styles.itemContainer}>
@@ -55,10 +60,12 @@ class PurchaseItem extends PureComponent<Props> {
             <Input
               placeholder="Кол-во 0.0 шт."
               value={floatInputValue(this.props.quantity)}
+              onChangeText={text => this.handleChangeInput("quantity", text)}
             />
             <Input
               placeholder="Цена 0.0 шт."
               value={floatInputValue(this.props.price)}
+              onChangeText={text => this.handleChangeInput("price", text)}
             />
             <TextBlock>Сумма: {floatInputValue(this.props.amount)}</TextBlock>
           </View>

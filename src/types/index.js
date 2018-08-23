@@ -22,5 +22,5 @@ export type PurchaseItem = {
   quantity: number,
   photoUri: string,
   barCode: string,
-  amount: number
+  amount?: number
 };
