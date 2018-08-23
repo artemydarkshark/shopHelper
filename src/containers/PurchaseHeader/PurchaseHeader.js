@@ -6,7 +6,9 @@ import { Text } from "native-base";
 import HeaderInput from "../../components/HeaderInput";
 
 type Props = {
-  shop: any
+  shop: any,
+  updateShop: Function,
+  date: string
 };
 
 const PurchaseHeader = (props: Props) => {
@@ -14,6 +16,7 @@ const PurchaseHeader = (props: Props) => {
 
   const name = props.shop.get("name");
   const totalAmount = props.shop.get("totalAmount");
+  const id = props.shop.get("id");
   return (
     <View
       style={{
@@ -22,7 +25,13 @@ const PurchaseHeader = (props: Props) => {
         alignItems: "flex-end"
       }}
     >
-      <HeaderInput placeholder="Покупка" value={name} />
+      <HeaderInput
+        placeholder="Покупка"
+        value={name}
+        onChangeText={text =>
+          props.updateShop({ id, date: props.date, param: "name", value: text })
+        }
+      />
       <View style={{ marginLeft: 10 }}>
         <Text style={{ color: "#fff", fontSize: 24 }}> Σ {totalAmount}</Text>
       </View>

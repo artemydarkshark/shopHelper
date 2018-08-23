@@ -3,18 +3,24 @@ import { persistCombineReducers } from "redux-persist";
 import immutableTransform from "redux-persist-transform-immutable";
 import storage from "redux-persist/lib/storage";
 
-import autoMergeLevel2Immutable from "../config/autoMergeLevel2Immutable";
+import hardSet from "redux-persist/lib/stateReconciler/hardSet";
 import { navReducer } from "../config/navigator";
 
 import mainReducer, { MainInitialState } from "../reducers/mainReducer";
-import shopingReducer, { ShoppingState } from "../reducers/shoppingReducer";
+import shopingReducer, {
+  ShoppingState,
+  PurchaseItemState,
+  DateItem
+} from "../reducers/shoppingReducer";
 
 const persistConfig = {
   key: "root",
   transforms: [
-    immutableTransform({ records: [MainInitialState, ShoppingState] })
+    immutableTransform({
+      records: [MainInitialState, ShoppingState, PurchaseItemState, DateItem]
+    })
   ],
-  stateReconciler: autoMergeLevel2Immutable,
+  stateReconciler: hardSet,
   storage
 };
 

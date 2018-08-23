@@ -12,7 +12,7 @@ import styles from "./styles";
 type Props = {
   navigation: Object,
   createShop: Function,
-  currentShops: any,
+  shopList: any,
   shopsPurchases: Object
 };
 
@@ -24,11 +24,11 @@ class FirstScreen extends React.PureComponent<Props> {
     color: "red"
   };
 
-  currentShopsMapper = () => {
-    const { currentShops, shopsPurchases } = this.props;
+  shopListMapper = () => {
+    const { shopList, shopsPurchases } = this.props;
 
-    if (!currentShops) return null;
-    return currentShops.map(item => {
+    if (!shopList) return null;
+    return shopList.map(item => {
       const id = item.get("id");
 
       return shopsPurchases.get(id) ? (
@@ -62,7 +62,7 @@ class FirstScreen extends React.PureComponent<Props> {
         >
           <View style={styles.container}>
             <View>
-              {this.currentShopsMapper()}
+              {this.shopListMapper()}
               <View style={styles.plusShop}>
                 <Icon
                   onPress={this.props.createShop}
@@ -72,7 +72,10 @@ class FirstScreen extends React.PureComponent<Props> {
                 />
               </View>
             </View>
-            <Conclusion navigate={this.goToSettings} />
+            <Conclusion
+              navigate={this.goToSettings}
+              shopList={this.props.shopList}
+            />
           </View>
         </ImageBackground>
       </View>

@@ -19,18 +19,19 @@ type Props = {
   photoUri: string,
   deletePurchase: Function,
   updatePurchase: Function,
+  currentDate: string,
   amount: number
 };
 
 class PurchaseItem extends PureComponent<Props> {
   deleteItem = () => {
-    const { id, shopId, deletePurchase } = this.props;
-    deletePurchase({ id, shopId });
+    const { id, shopId, deletePurchase, currentDate } = this.props;
+    deletePurchase({ id, shopId, date: currentDate });
   };
 
   handleChangeInput = (name: string, text: string): void => {
-    const { id, shopId, updatePurchase } = this.props;
-    updatePurchase({ id, shopId, param: name, value: text });
+    const { id, shopId, updatePurchase, currentDate } = this.props;
+    updatePurchase({ id, shopId, param: name, value: text, date: currentDate });
   };
   render() {
     return (

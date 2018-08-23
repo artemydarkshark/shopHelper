@@ -13,7 +13,7 @@ import FirstScreen from "./FirstScreen";
 const makeMapStateToProps = () => {
   const mapStateToProps = createStructuredSelector({
     showDatePicker: getIsDatePickerOpen,
-    currentShops: getShopList,
+    shopList: getShopList,
     shopsPurchases: getShopsPurchases
   });
   return mapStateToProps;

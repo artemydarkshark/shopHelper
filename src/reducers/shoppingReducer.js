@@ -8,7 +8,7 @@ import type { Payload, ShopItem, PurchaseItem } from "../types";
 
 import * as shoppingActions from "../actions/shoppingActions";
 
-const DateItem: RecordFactory<ShopItem> = Record(
+export const DateItem: RecordFactory<ShopItem> = Record(
   {
     id: uuid(),
     name: "Покупка",
@@ -19,7 +19,7 @@ const DateItem: RecordFactory<ShopItem> = Record(
 
 type dateList = List<DateItem>;
 
-const PurchaseItemState: RecordFactory<PurchaseItem> = Record(
+export const PurchaseItemState: RecordFactory<PurchaseItem> = Record(
   {
     id: uuid(),
     name: "Товар",
@@ -31,7 +31,7 @@ const PurchaseItemState: RecordFactory<PurchaseItem> = Record(
   "purchaseItem"
 );
 
-// $FlowFixMe
+// // $FlowFixMe
 Object.defineProperty(PurchaseItemState.prototype, "amount", {
   get() {
     if (!this.price) return 0;
@@ -57,6 +57,18 @@ export const ShoppingState: RecordFactory<state> = Record(
 const getList = (state, entity: string, id: string) =>
   state.getIn([entity, id], List());
 
+const shopAmount = (updatedList: PurchaseList): number =>
+  updatedList.reduce((acc, item) => acc + item.amount, 0);
+
+const updatedListWithTotalAmount = ({ state, updatedList, date, shopId }) => {
+  const dateList = state.getIn(["dates", date], List());
+  const totalAmount = shopAmount(updatedList);
+
+  return dateList.update(dateList.findIndex(item => item.id === shopId), item =>
+    item.set("totalAmount", totalAmount)
+  );
+};
+
 const addShop = (
   state,
   { payload }: Payload<{ id: string, date: string }>
@@ -74,12 +86,12 @@ const addShop = (
 const addPurchase = (
   state,
   {
-    payload: { id, price, quantity }
-  }: Payload<{ id: string, price: string, quantity: string }>
+    payload: { id, price, quantity, date }
+  }: Payload<{ id: string, price: string, quantity: string, date: string }>
 ): RecordOf<state> => {
   const purchaseList = getList(state, "shops", id);
 
-  const updatedPurchaseList = purchaseList.unshift(
+  const updatedList = purchaseList.unshift(
     new PurchaseItemState({
       id: uuid(),
       name: `Товар ${purchaseList.size + 1}`,
@@ -88,7 +100,18 @@ const addPurchase = (
     })
   );
 
-  return state.setIn(["shops", id], updatedPurchaseList);
+  const updateDateList = updatedListWithTotalAmount({
+    state,
+    updatedList,
+    date,
+    shopId: id
+  });
+
+  return state.withMutations(shoppingReducer =>
+    shoppingReducer
+      .setIn(["shops", id], updatedList)
+      .setIn(["dates", date], updateDateList)
+  );
 };
 
 const deleteShop = (
@@ -102,31 +125,82 @@ const deleteShop = (
 };
 const deletePurchase = (
   state,
-  { payload: { id, shopId } }: Payload<{ shopId: string, id: string }>
+  {
+    payload: { id, shopId, date }
+  }: Payload<{ shopId: string, id: string, date: string }>
 ): RecordOf<state> => {
   const shopList = getList(state, "shops", shopId);
   const updatedList = shopList.filter(item => item.id !== id);
 
-  return state.setIn(["shops", shopId], updatedList);
+  const updateDateList = updatedListWithTotalAmount({
+    state,
+    updatedList,
+    date,
+    shopId
+  });
+
+  return state.withMutations(shoppingReducer =>
+    shoppingReducer
+      .setIn(["shops", shopId], updatedList)
+      .setIn(["dates", date], updateDateList)
+  );
+};
+
+const updateShop = (
+  state,
+  {
+    payload: { date, id, param, value }
+  }: Payload<{
+    id: string,
+    date: string,
+    param: string,
+    value: any
+  }>
+): RecordOf<state> => {
+  const list = state.getIn(["dates", date], List());
+
+  const updateList = list.update(list.findIndex(item => item.id === id), item =>
+    item.set(param, value)
+  );
+  return state.setIn(["dates", date], updateList);
 };
 
 const updatePurchase = (
   state,
   {
-    payload: { id, shopId, param, value }
-  }: Payload<{ shopId: string, id: string, param: string, value: any }>
+    payload: { id, shopId, param, value, date }
+  }: Payload<{
+    shopId: string,
+    id: string,
+    param: string,
+    value: any,
+    date: string
+  }>
 ): RecordOf<state> => {
   const shopList = getList(state, "shops", shopId);
   const updatedList = shopList.update(
     shopList.findIndex(item => item.id === id),
     item => item.set(param, value)
   );
-  return state.setIn(["shops", shopId], updatedList);
+
+  const updateDateList = updatedListWithTotalAmount({
+    state,
+    updatedList,
+    date,
+    shopId
+  });
+
+  return state.withMutations(shoppingReducer =>
+    shoppingReducer
+      .setIn(["shops", shopId], updatedList)
+      .setIn(["dates", date], updateDateList)
+  );
 };
 
 export default handleActions(
   {
     [shoppingActions.addShop]: addShop,
+    [shoppingActions.updateShop]: updateShop,
     [shoppingActions.deleteShop]: deleteShop,
     [shoppingActions.createPurchase]: addPurchase,
     [shoppingActions.updatePurchase]: updatePurchase,

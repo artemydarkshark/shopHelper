@@ -7,7 +7,8 @@ import styles from "./styles";
 
 type Props = {
   placeholder: string,
-  value: string
+  value: string,
+  onChangeText: Function
 };
 
 const HeaderInput = (props: Props) => (
@@ -17,6 +18,7 @@ const HeaderInput = (props: Props) => (
       placeholderTextColor="#fff"
       placeholder={props.placeholder}
       value={props.value}
+      onChangeText={props.onChangeText}
     />
     <Icon name="pencil" style={styles.icon} />
   </Item>
