@@ -48,9 +48,6 @@ class FirstScreen extends React.PureComponent<Props> {
     this.props.navigation.navigate(page, opts);
   };
 
-  goToPurchasesScreen = this.goToPage.bind(null, "PurchasesScreen", { id: 1 });
-  goToSettings = this.goToPage.bind(null, "Settings");
-
   render() {
     const size = iconSize * 1.4;
 
@@ -74,7 +71,7 @@ class FirstScreen extends React.PureComponent<Props> {
               </View>
             </View>
             <Conclusion
-              navigate={this.goToSettings}
+              navigate={() => this.goToPage("Settings")}
               amountOfMoney={this.props.amountOfMoney}
             />
           </View>

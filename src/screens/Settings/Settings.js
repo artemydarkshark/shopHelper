@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { PureComponent } from "react";
 import { View } from "react-native";
 import DatePicker from "react-native-datepicker";
 
@@ -17,39 +17,60 @@ const languages = [
 ];
 
 type Props = {
-  setCurrent: Function
+  setCurrent: Function,
+  currency: string,
+  locale: string,
+  reportName: string,
+  email: string,
+  changeSetting: Function
 };
 
-const Settings = (props: Props) => (
-  <View style={styles.settingContainer}>
-    <TextBlock styles={styles.header} bold>
-      Настройки покупок
-    </TextBlock>
-    <Input placeholder="Гривны" />
-    <Select placeholder="Language" options={languages} />
-    <SettingButton onPress={() => {}} title="Сохранить" />
-    <View style={styles.dateContainer}>
-      <TextBlock>Удалить все записи по: </TextBlock>
-      <DatePicker
-        format={timeModel}
-        customStyles={{
-          dateInput: styles.dateInput,
-          dateText: styles.dateText
-        }}
-        confirmBtnText="Confirm"
-        cancelBtnText="Cancel"
-        onDateChange={props.setCurrent}
-      />
-    </View>
-    <SettingButton onPress={() => {}} title="Удалить" />
-    <TextBlock styles={styles.header} bold>
-      Настройки отчётов
-    </TextBlock>
-    <Input placeholder="example@gmail.com" />
-    <Input placeholder="Отчёт о закупках" />
-    <SettingButton onPress={() => {}} title="Сохранить" />
-  </View>
-);
+class Settings extends PureComponent<Props> {
+  changeSetting = (name, value) => this.props.changeSetting({ name, value });
+  render() {
+    return (
+      <View style={styles.settingContainer}>
+        <TextBlock styles={styles.header} bold>
+          Настройки покупок
+        </TextBlock>
+        <Input
+          placeholder="Гривны"
+          value={this.props.currency}
+          onChangeText={text => this.changeSetting("currency", text)}
+        />
+        <Select placeholder="Language" options={languages} />
+        {/* <SettingButton onPress={() => {}} title="Сохранить" /> */}
+        <View style={styles.dateContainer}>
+          <TextBlock>Удалить все записи по: </TextBlock>
+          <DatePicker
+            format={timeModel}
+            customStyles={{
+              dateInput: styles.dateInput,
+              dateText: styles.dateText
+            }}
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+          />
+        </View>
+        <SettingButton title="Удалить" />
+        <TextBlock styles={styles.header} bold>
+          Настройки отчётов
+        </TextBlock>
+        <Input
+          placeholder="example@gmail.com"
+          value={this.props.email}
+          onChangeText={text => this.changeSetting("email", text)}
+        />
+        <Input
+          placeholder="Отчёт о закупках"
+          value={this.props.reportName}
+          onChangeText={text => this.changeSetting("reportName", text)}
+        />
+        {/* <SettingButton onPress={() => {}} title="Сохранить" /> */}
+      </View>
+    );
+  }
+}
 
 Settings.navigationOptions = {
   title: "Settings"

@@ -1,15 +1,21 @@
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 import Settings from "./Settings";
 
-import { getCurrentDate } from "../../selectors/mainSelectors";
+import * as settingSelectors from "../../selectors/settingSelectors";
 import { changeDate } from "../../actions/mainActions";
+import { changeSetting } from "../../actions/settingActions";
 
-const mapStateToProps = state => ({
-  currDate: getCurrentDate(state)
+const mapStateToProps = createStructuredSelector({
+  currency: settingSelectors.getCurrency,
+  locale: settingSelectors.getLocale,
+  reportName: settingSelectors.getReportName,
+  email: settingSelectors.getEmail
 });
 
 const mapDispatchToProps = {
-  setCurrent: changeDate.setCurrent
+  setCurrent: changeDate.setCurrent,
+  changeSetting
 };
 
 export default connect(
