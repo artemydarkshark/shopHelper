@@ -6,6 +6,7 @@ export default StyleSheet.create({
   },
   input: {
     paddingHorizontal: 10,
+    paddingVertical: 0,
     height: 30
   }
 });

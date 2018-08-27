@@ -8,6 +8,7 @@ export default StyleSheet.create({
   input: {
     color: "#fff",
     height: 30,
+    paddingVertical: 0,
     fontSize: 16
   },
   icon: {
