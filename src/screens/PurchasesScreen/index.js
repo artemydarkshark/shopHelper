@@ -5,7 +5,12 @@ import { createStructuredSelector } from "reselect";
 
 import PurchasesScreen from "./PurchasesScreen";
 import { getCurrentDate } from "../../selectors/mainSelectors";
-import { getPurchases, getShopList } from "../../selectors/shoppingSelectors";
+import {
+  getPurchases,
+  getShopList,
+  getShopAmount,
+  getShopQuantity
+} from "../../selectors/shoppingSelectors";
 import {
   createPurchase,
   deleteShop,
@@ -19,6 +24,8 @@ const makeMapStateToProps = () => {
   const mapStateToProps = createStructuredSelector({
     currentDate: getCurrentDate,
     shopList: getShopList,
+    shopAmount: getShopAmount,
+    shopQuantity: getShopQuantity,
     purchases
   });
   return mapStateToProps;

@@ -18,7 +18,7 @@ export default () => {
     applyMiddleware(...middlewares),
     devTools({
       name: "shopHelper",
-      realtime: process.env.NODE_ENV === "development"
+      realtime: true
     })
   );
   const store = createStore(persistedReducer, enhancer);

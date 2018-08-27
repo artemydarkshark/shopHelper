@@ -37,9 +37,14 @@ class PurchaseItem extends PureComponent<Props> {
     return (
       <View style={styles.itemContainer}>
         <View style={styles.itemHeader}>
-          <TextBlock styles={styles.title} bold>
-            {this.props.name}
-          </TextBlock>
+          <View style={{ flex: 1 }}>
+            <Input
+              placeholder="Кол-во 0.0 шт."
+              value={this.props.name}
+              keyboardType="numeric"
+              onChangeText={text => this.handleChangeInput("name", text)}
+            />
+          </View>
           <Icon
             style={styles.headerIcon}
             onPress={this.deleteItem}
@@ -61,11 +66,13 @@ class PurchaseItem extends PureComponent<Props> {
             <Input
               placeholder="Кол-во 0.0 шт."
               value={floatInputValue(this.props.quantity)}
+              keyboardType="numeric"
               onChangeText={text => this.handleChangeInput("quantity", text)}
             />
             <Input
               placeholder="Цена 0.0 шт."
               value={floatInputValue(this.props.price)}
+              keyboardType="numeric"
               onChangeText={text => this.handleChangeInput("price", text)}
             />
             <TextBlock>Сумма: {floatInputValue(this.props.amount)}</TextBlock>

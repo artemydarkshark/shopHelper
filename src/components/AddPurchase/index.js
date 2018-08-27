@@ -45,6 +45,7 @@ class AddPurchase extends PureComponent<Props, State> {
             placeholder="Кол-во 0.0 шт."
             onChangeText={text => this.handleChange("quantity", text)}
             value={this.state.quantity}
+            keyboardType="numeric"
           />
         </View>
         <View style={styles.inputContainer}>
@@ -52,6 +53,7 @@ class AddPurchase extends PureComponent<Props, State> {
             placeholder="Цена 0.0 грн"
             onChangeText={text => this.handleChange("price", text)}
             value={this.state.price}
+            keyboardType="numeric"
           />
         </View>
         <Icon

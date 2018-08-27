@@ -6,7 +6,7 @@ export default StyleSheet.create({
     borderBottomColor: "#eee",
     borderBottomWidth: 1,
     paddingHorizontal: 10,
-    paddingVertical: 12
+    paddingVertical: 10
   },
   itemHeader: {
     flexDirection: "row",

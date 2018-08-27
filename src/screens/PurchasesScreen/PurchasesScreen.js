@@ -14,6 +14,8 @@ type Props = {
   currentDate: string,
   shopList: any,
   purchases: any,
+  shopAmount: number,
+  shopQuantity: number,
   createPurchase: Function,
   deleteShop: Function,
   updatePurchase: Function,
@@ -76,7 +78,10 @@ class PurchasesScreen extends React.Component<Props> {
         <View>
           <ScrollView>{this.purchaseItemMapper()}</ScrollView>
         </View>
-        <PurchaseFooter />
+        <PurchaseFooter
+          amount={this.props.shopAmount}
+          quantity={this.props.shopQuantity}
+        />
       </View>
     );
   }
