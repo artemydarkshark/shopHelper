@@ -3,8 +3,7 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   item: {
     backgroundColor: "#fff",
-    paddingTop: 10,
-    paddingHorizontal: 10,
+    padding: 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

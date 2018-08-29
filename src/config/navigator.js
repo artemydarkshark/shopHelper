@@ -10,13 +10,15 @@ import FirstScreen from "../screens/FirstScreen";
 import Settings from "../screens/Settings";
 import PurchasesScreen from "../screens/PurchasesScreen";
 import Camera from "../screens/Camera";
+import BarCodeCamera from "../screens/BarCodeCamera";
 
 export const StackNavigator = createStackNavigator(
   {
     Home: FirstScreen,
     Settings,
     PurchasesScreen,
-    Camera
+    Camera,
+    BarCode: BarCodeCamera
   },
   {
     initialRouteName: "Home",

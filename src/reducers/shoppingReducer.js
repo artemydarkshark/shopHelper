@@ -25,7 +25,7 @@ export const PurchaseItemState: RecordFactory<PurchaseItem> = Record(
     name: "Товар",
     price: 0.0,
     quantity: 1.0,
-    photoUri: "",
+    photo: "",
     barCode: ""
   },
   "purchaseItem"

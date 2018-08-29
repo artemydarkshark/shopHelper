@@ -3,7 +3,7 @@
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
-import Camera from "./Camera";
+import BarCodeCamera from "./BarCodeCamera";
 import { getCurrentDate } from "../../selectors/mainSelectors";
 import { updatePurchase } from "../../actions/shoppingActions";
 
@@ -21,4 +21,4 @@ const mapDispatchToProps = {
 export default connect(
   makeMapStateToProps(),
   mapDispatchToProps
-)(Camera);
+)(BarCodeCamera);

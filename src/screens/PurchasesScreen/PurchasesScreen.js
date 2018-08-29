@@ -38,8 +38,8 @@ class PurchasesScreen extends React.Component<Props> {
     }
   };
 
-  goToPage = (page: string): void => {
-    this.props.navigation.navigate(page);
+  goToPage = (page: string, opts: Object = {}): void => {
+    this.props.navigation.navigate(page, opts);
   };
 
   purchaseItemMapper = () =>
@@ -57,7 +57,8 @@ class PurchasesScreen extends React.Component<Props> {
               name={item.get("name")}
               price={item.get("price")}
               quantity={item.get("quantity")}
-              photoUri={item.get("photoUri")}
+              photo={item.get("photo")}
+              barCode={item.get("barCode")}
               amount={item.amount}
               goToPage={this.goToPage}
             />
@@ -75,7 +76,7 @@ class PurchasesScreen extends React.Component<Props> {
           createPurchase={this.props.createPurchase}
           currentDate={this.props.currentDate}
         />
-        <View>
+        <View style={styles.purchases}>
           <ScrollView>{this.purchaseItemMapper()}</ScrollView>
         </View>
         <PurchaseFooter

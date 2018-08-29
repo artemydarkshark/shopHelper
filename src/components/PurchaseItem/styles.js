@@ -6,7 +6,7 @@ export default StyleSheet.create({
     borderBottomColor: "#eee",
     borderBottomWidth: 1,
     paddingHorizontal: 10,
-    paddingVertical: 10
+    paddingVertical: 15
   },
   itemHeader: {
     flexDirection: "row",
@@ -22,7 +22,7 @@ export default StyleSheet.create({
   },
   itemContent: {
     flexDirection: "row",
-    marginTop: 18
+    marginTop: 10
   },
   itemConsumption: {
     justifyContent: "space-around",

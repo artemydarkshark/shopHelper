@@ -5,5 +5,8 @@ export default StyleSheet.create({
     flexDirection: "column",
     position: "relative",
     height: "100%"
+  },
+  purchases: {
+    marginBottom: 10
   }
 });

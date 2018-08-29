@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   inputContainer: {
-    marginBottom: 18
+    marginBottom: 12
   },
   input: {
     paddingHorizontal: 10,
